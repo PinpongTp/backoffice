@@ -1,17 +1,14 @@
 # Project My back office 
-====================
 
 This project is back office or content management system.
 It's my first nodejs project.
 I built from scratch because I'm a PHP programmer.
 
 ## Use
--------------
 - react
 - bulma
 
 ## Version
--------------
 
 ### V0.01
 - setup project
