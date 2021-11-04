@@ -1,7 +1,7 @@
 import React from "react";
 // import {Link} from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faCoffee } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faCheck, faCoffee } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types';
 // import { useState } from 'react'
 

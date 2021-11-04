@@ -8,6 +8,8 @@ import Modal from "./components/layouts/modal";
 import Home from "./components/pages/home";
 import Note from "./components/pages/note";
 import Login from "./components/pages/login";
+// test
+import Popup from "./components/layouts/popup"
 
 
 
@@ -42,6 +44,14 @@ class App extends Component {
     });
   }
 
+  test() {
+    console.log('test')
+
+
+    Popup.show('xxx')
+
+  }
+
   render() {
     return (
       <main className="my-app">
@@ -61,6 +71,8 @@ class App extends Component {
         <button className="button is-primary" onClick={this.toggleModal}>
           Open Modal
         </button>
+
+        <button className='button is-primary' onClick={this.test}>test</button>
 
         <div id="container" className="App">
           <Switch>
