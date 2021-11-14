@@ -15,8 +15,7 @@ function Login () {
     }
 
     return (
-        <div>
-            <section className="section is-medium">
+        <section className="section is-medium fit">
                 <div className="container is-max-desktop">
                     <div className="columns">
                         <div style={{padding:"50px"}} className="column left" >
@@ -48,7 +47,6 @@ function Login () {
                     </div>
                 </div>
             </section>
-        </div>
 
     )
 }

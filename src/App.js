@@ -1,15 +1,18 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 // layouts
 import Footer from "./components/layouts/footer";
 import Nav from "./components/layouts/nav";
+// import Content from "./components/layouts/content"
+
+import Aside from "./components/layouts/aside";
 import Modal from "./components/layouts/modal";
 // pages
 import Home from "./components/pages/home";
-import Note from "./components/pages/note";
 import Login from "./components/pages/login";
+import ProfileEdit from "./components/pages/profile/profile-edit"
 // test
-import Popup from "./components/layouts/popup"
+// import Popup from "./components/layouts/popup"
 
 
 
@@ -17,29 +20,55 @@ import Popup from "./components/layouts/popup"
 // const Post = () => <h1>Post</h1>
 // const Project = () => <h1>Project</h1>
 
-class App extends Component {
+const AuthContainer = () => (
+  <div id="container" className="App flex container">
+    <Switch>
+      <Route exact path="/" render={() => <Redirect to="/login" />} />
+      <Route path="/login" component={Login} />
+    </Switch>
+  </div>
+)
 
+const DefaultContainer = () => (
+  <div id="container" className="App flex container">
+    <Aside />
+    <div className="main">
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route exact path="/" component={Home} />
+        <Route path="/home" component={Home} />
+        <Route path="/profile-edit" component={ProfileEdit} />
+        <Route pate="/:id"> 404 </Route>
+        <Route pate="*"> * </Route>
+      </Switch>
+    </div>
+  </div>
+)
+
+
+
+class App extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       modalState: false
     };
-    
+
     this.toggleModal = this.toggleModal.bind(this);
   }
 
-  toggleModal() { 
+  toggleModal() {
 
-    
+
 
     // if(this.item === undefined) {return}
 
     console.log('toggleModal')
-    
+
     this.setState((prev, props) => {
       const newState = !prev.modalState;
-      
+
       return { modalState: newState };
     });
   }
@@ -47,8 +76,10 @@ class App extends Component {
   test() {
     console.log('test')
 
+    // const location = useLocation();
+    // console.log(location.pathname);
 
-    Popup.show('xxx')
+    // Popup.show('xxx')
 
   }
 
@@ -56,9 +87,9 @@ class App extends Component {
     return (
       <main className="my-app">
 
-        <Modal 
-          closeModal={this.toggleModal} 
-          modalState={this.state.modalState} 
+        <Modal
+          closeModal={this.toggleModal}
+          modalState={this.state.modalState}
           title="Example modal title"
         >
           <p>
@@ -68,20 +99,16 @@ class App extends Component {
 
         <Nav />
 
-        <button className="button is-primary" onClick={this.toggleModal}>
+        {/* <button className="button is-primary" onClick={this.toggleModal}>
           Open Modal
-        </button>
+        </button> */}
 
-        <button className='button is-primary' onClick={this.test}>test</button>
+        {/* <button className='button is-primary' onClick={this.test}>test</button> */}
 
-        <div id="container" className="App">
-          <Switch>
-            <Route path="/login" component={Login} />
-            <Route exact path="/" component={Home} />
-            <Route path="/note" component={Note} />
-            <Route pate="/:id"> 404 </Route>
-          </Switch>
-        </div>
+        <Switch>
+          <Route exact path="/(login)" component={AuthContainer} />
+          <Route component={DefaultContainer} />
+        </Switch>
 
         <Footer />
       </main>

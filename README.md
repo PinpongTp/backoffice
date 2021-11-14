@@ -12,9 +12,22 @@ I built from scratch because I'm a PHP programmer.
 
 ### V0.01
 - setup project
-- setup directory
+- setup directory file
 - setup react -> rourter
 - setup layout with bulma
 - setup font awesome icon
 - bulma modal with react
 - ui login page
+- setup sidebar
+
+## directory
+
+    .
+    ├── src
+    │   ├── components
+    │   │   ├── layouts
+    │   │   └── pages
+    │   └── css
+    └── public
+        ├── img
+        └── content

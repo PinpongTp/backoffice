@@ -7,24 +7,18 @@ const Home = () => {
         <div>
             <section className="section">
                 <div className="container">
-                    <h1 className="title">This is my home page.</h1>
-                    <p>This is my home page.</p>
+                    <h1 className="title">This is my Dashboard page.</h1>
+                    <p>This is my Dashboard page.</p>
                 </div>
             </section>
             <section className="hero is-primary">
                 <div className="hero-body">
                     <p className="title">
-                    Primary hero
+                    Backoffice
                     </p>
                     <p className="subtitle">
-                    Primary subtitle
+                    Pinpong.co content management system.
                     </p>
-                </div>
-            </section>
-            <section className="section">
-                <div className="container">
-                    <h1 className="title">This is my home page.</h1>
-                    <p>This is my home page.</p>
                 </div>
             </section>
         </div>
