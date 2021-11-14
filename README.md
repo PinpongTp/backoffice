@@ -8,9 +8,10 @@ I built from scratch because I'm a PHP programmer.
 - react
 - bulma
 
-## Version
+## Version log update
 
 ### V0.01
+- backoffice layout with bulma
 - setup project
 - setup directory file
 - setup react -> rourter
@@ -19,9 +20,15 @@ I built from scratch because I'm a PHP programmer.
 - bulma modal with react
 - ui login page
 - setup sidebar
+- setup express api file in server directory
+- setup JWT for register and login
+- edit directory construction file
+- create backoffice database
 
-## directory
 
+## Directory
+
+### client file
     .
     ├── src
     │   ├── components
@@ -31,3 +38,11 @@ I built from scratch because I'm a PHP programmer.
     └── public
         ├── img
         └── content
+
+### server file
+    .
+    ├── controller
+    ├── db
+    ├── model
+    └── route
+
