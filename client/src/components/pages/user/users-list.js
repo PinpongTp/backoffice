@@ -1,9 +1,22 @@
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faSearch, faCheck, faUser, faTrashAlt, faUserEdit } from '@fortawesome/free-solid-svg-icons'
+//
+import Axios from 'axios'
+import { useState } from 'react'
+
 
 
 const UsersList = () => {
+
+    const [userList, setUserList] = useState([]);
+    const getUsers = () => {
+        Axios.get('http://localhost:3001/user/list').then((res) => {
+            setUserList(res.data)
+        })
+    }
+
+    getUsers()
 
     return (
         <section className="section">
@@ -40,42 +53,33 @@ const UsersList = () => {
                     <div className="content">
                         <table className="table is-fullwidth is-striped">
                             <tbody>
-                                <tr>
-                                    <td width="5%">
-                                        <FontAwesomeIcon icon={faUser} />
-                                    </td>
-                                    <td>Pinpong Tongpat</td>
-                                    <td>Admin</td>
-                                    <td className="level-right">
-                                        <Link className="button is-small is-primary" to="#">
-                                            <FontAwesomeIcon icon={faUserEdit} />
-                                        </Link>
-                                        <Link className="button is-small is-primary" to="#">
-                                            <FontAwesomeIcon icon={faTrashAlt} />
-                                        </Link>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td width="5%">
-                                        <FontAwesomeIcon icon={faUser} />
-                                    </td>
-                                    <td>Pinpong Tongpat</td>
-                                    <td>Admin</td>
-                                    <td className="level-right">
-                                        <Link className="button is-small is-primary" to="#">
-                                            <FontAwesomeIcon icon={faUserEdit} />
-                                        </Link>
-                                        <Link className="button is-small is-primary" to="#">
-                                            <FontAwesomeIcon icon={faTrashAlt} />
-                                        </Link>
-                                    </td>
-                                </tr>
+
+                                {userList.map((val, key) => {
+                                    return (
+                                        <tr key={key}>
+                                            <td width="5%">
+                                                <FontAwesomeIcon icon={faUser} />
+                                            </td>
+                                            <td>{val.email}</td>
+                                            <td>Admin</td>
+                                            <td className="level-right">
+                                                <Link className="button is-small is-primary" to="#">
+                                                    <FontAwesomeIcon icon={faUserEdit} />
+                                                </Link>
+                                                <Link className="button is-small is-primary" to="#">
+                                                    <FontAwesomeIcon icon={faTrashAlt} />
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    )
+                                })}
+
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <footer className="card-footer">
-                    <a href="#" className="card-footer-item">View All</a>
+                    <Link to="#" className="card-footer-item">View All</Link>
                 </footer>
             </div>
 

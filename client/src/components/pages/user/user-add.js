@@ -1,9 +1,10 @@
+import { Link } from 'react-router-dom'
 const UserAdd = () => {
 
     return (
         <section class="content section">
             <h1>Hello World</h1>
-            <p>Lorem ipsum<sup><a>[1]</a></sup> dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus, nec rutrum justo nibh eu lectus. Ut vulputate semper dui. Fusce erat odio, sollicitudin vel erat vel, interdum mattis neque. Sub<sub>script</sub> works as well!</p>
+            <p>Lorem ipsum<sup><Link to="#">[1]</Link></sup> dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus, nec rutrum justo nibh eu lectus. Ut vulputate semper dui. Fusce erat odio, sollicitudin vel erat vel, interdum mattis neque. Sub<sub>script</sub> works as well!</p>
             <h2>Second level</h2>
             <p>Curabitur accumsan turpis pharetra <strong>augue tincidunt</strong> blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque nisl.</p>
             <ul>
@@ -13,7 +14,7 @@ const UserAdd = () => {
                 <li>Ut non enim metus.</li>
             </ul>
             <h3>Third level</h3>
-            <p>Quisque ante lacus, malesuada ac auctor vitae, congue <a href="#">non ante</a>. Phasellus lacus ex, semper ac tortor nec, fringilla condimentum orci. Fusce eu rutrum tellus.</p>
+            <p>Quisque ante lacus, malesuada ac auctor vitae, congue <Link to="#">non ante</Link>. Phasellus lacus ex, semper ac tortor nec, fringilla condimentum orci. Fusce eu rutrum tellus.</p>
             <ol>
                 <li>Donec blandit a lorem id convallis.</li>
                 <li>Cras gravida arcu at diam gravida gravida.</li>

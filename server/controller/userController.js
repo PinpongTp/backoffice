@@ -84,10 +84,7 @@ exports.userListController = (req, res, next) => {
     UserModel.getUserList()
         .then(([result]) => {
             res.status(200)
-                .json({
-                    message: "success",
-                    data: result
-                })
+                .json(result)
         })
         .catch((error) => {
             res.status(500)
