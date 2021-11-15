@@ -1,19 +1,19 @@
-import { Link } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 
 const Aside = () => {
 
     return (
         <aside
-            className="sidebar menu is-hidden-mobile"
+            className="sidebar menu pad"
         >
             <p className="menu-label">
                 General
             </p>
             <ul className="menu-list">
                 <li>
-                    <Link to="/home" className="navbar-item is-active">
+                    <NavLink to="/home" activeClassName="is-active">
                         Dashboard
-                    </Link>
+                    </NavLink>
                 </li>
             </ul>
             <p className="menu-label">
@@ -21,14 +21,14 @@ const Aside = () => {
             </p>
             <ul className="menu-list">
                 <li>
-                    <Link to="/home" className="navbar-item is-active">
+                    <NavLink activeClassName="is-active" to="/information">
                         information
-                    </Link>
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/home" className="navbar-item is-active">
+                    <NavLink activeClassName="is-active" to="/theme">
                         theme
-                    </Link>
+                    </NavLink>
                 </li>
             </ul>
             <p className="menu-label">
@@ -36,15 +36,30 @@ const Aside = () => {
             </p>
             <ul className="menu-list">
                 <li>
-                    <Link to="/projects-list" className="navbar-item is-active">
+                    <NavLink activeClassName="is-active" to="/projects-list">
                         Projects
-                    </Link>
-                    <Link to="/notes-list" className="navbar-item is-active">
+                    </NavLink>
+                    <NavLink activeClassName="is-active" to="/notes-list">
                         Notes
-                    </Link>
-                    <Link to="/gallerys-list" className="navbar-item is-active">
+                    </NavLink>
+                    <NavLink activeClassName="is-active" to="/gallerys-list">
                         Gallerys
-                    </Link>
+                    </NavLink>
+                </li>
+            </ul>
+            <p className="menu-label">
+                Administer
+            </p>
+            <ul className="menu-list">
+                <li>
+                    <NavLink activeClassName="is-active" to="/users-list">
+                        Manage users
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink activeClassName="is-active" to="/user-add">
+                        Add user
+                    </NavLink>
                 </li>
             </ul>
             <p className="menu-label">
@@ -52,29 +67,29 @@ const Aside = () => {
             </p>
             <ul className="menu-list">
                 <li>
-                    <Link to="/profile-edit" >
+                    <Link to="/profile-edit"  >
                         Edit profile
                     </Link>
                     <ul>
                         <li>
-                            <Link to="/profile-edit" className="navbar-item">
+                            <NavLink activeClassName="is-active" to="/profile-edit" >
                                 Edit profile
-                            </Link>
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to="/profile-change-password" className="navbar-item">
+                            <NavLink activeClassName="is-active" to="/profile-change-password" >
                                 Change password
-                            </Link>
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to="/profile-delete" className="navbar-item">
+                            <NavLink activeClassName="is-active" to="/profile-delete" >
                                 Delete profile
-                            </Link>
+                            </NavLink>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <Link to="/login" className="navbar-item">
+                    <Link to="/login">
                         Logout
                     </Link>
                 </li>

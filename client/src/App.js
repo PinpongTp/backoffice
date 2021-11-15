@@ -1,24 +1,23 @@
+//! module
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-// layouts
+
+//! layouts
 import Footer from "./components/layouts/footer";
 import Nav from "./components/layouts/nav";
-// import Content from "./components/layouts/content"
-
 import Aside from "./components/layouts/aside";
 import Modal from "./components/layouts/modal";
-// pages
+
+//! pages
 import Home from "./components/pages/home";
 import Login from "./components/pages/login";
+// profile
 import ProfileEdit from "./components/pages/profile/profile-edit"
+// user
+import UsersList from "./components/pages/user/users-list"
+import UserAdd from "./components/pages/user/user-add"
 // test
-// import Popup from "./components/layouts/popup"
 
-
-
-// const About = () => <h1>About</h1>
-// const Post = () => <h1>Post</h1>
-// const Project = () => <h1>Project</h1>
 
 const AuthContainer = () => (
   <div id="container" className="App flex container">
@@ -32,12 +31,13 @@ const AuthContainer = () => (
 const DefaultContainer = () => (
   <div id="container" className="App flex container">
     <Aside />
-    <div className="main">
+    <div className="main pad">
       <Switch>
-        <Route path="/login" component={Login} />
         <Route exact path="/" component={Home} />
         <Route path="/home" component={Home} />
         <Route path="/profile-edit" component={ProfileEdit} />
+        <Route path="/users-list" component={UsersList} />
+        <Route path="/user-add" component={UserAdd} />
         <Route pate="/:id"> 404 </Route>
         <Route pate="*"> * </Route>
       </Switch>
