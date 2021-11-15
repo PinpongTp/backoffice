@@ -4,23 +4,59 @@
 const Home = () => {
 
     return (
-        <div>
-            <section className="section">
-                <div className="container">
-                    <h1 className="title">This is my Dashboard page.</h1>
-                    <p>This is my Dashboard page.</p>
+        <div className="section">
+            <div className="columns">
+                <div className="column">
+                    <h3 className="title is-4">Dashboard</h3>
                 </div>
-            </section>
-            <section className="hero is-primary">
+            </div>
+
+            <section className="hero is-info welcome is-small">
                 <div className="hero-body">
-                    <p className="title">
-                    Backoffice
-                    </p>
-                    <p className="subtitle">
-                    Pinpong.co content management system.
-                    </p>
+                    <div className="container">
+                        <h1 className="title">
+                            Hello, Admin.
+                        </h1>
+                        <h2 className="subtitle">
+                            I hope you are having a great day!
+                        </h2>
+                    </div>
                 </div>
             </section>
+
+            <br/>
+
+            <section className="info-tiles">
+                <div className="tile is-ancestor has-text-centered">
+                    <div className="tile is-parent">
+                        <article className="tile is-child box">
+                            <p className="title">439k</p>
+                            <p className="subtitle">Users</p>
+                        </article>
+                    </div>
+                    <div className="tile is-parent">
+                        <article className="tile is-child box">
+                            <p className="title">59k</p>
+                            <p className="subtitle">Products</p>
+                        </article>
+                    </div>
+                    <div className="tile is-parent">
+                        <article className="tile is-child box">
+                            <p className="title">3.4k</p>
+                            <p className="subtitle">Open Orders</p>
+                        </article>
+                    </div>
+                    <div className="tile is-parent">
+                        <article className="tile is-child box">
+                            <p className="title">19</p>
+                            <p className="subtitle">Exceptions</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+
+
         </div>
 
     )
