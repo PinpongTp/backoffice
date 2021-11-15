@@ -37,8 +37,6 @@ exports.loginController = (req, res, next) => {
     UserModel.findUserByEmail({ email: email })
         .then(([row]) => {
             if (row.length !== 0) {
-
-                
                 return bcrypt.compare(password, row[0].password)
                     .then((result) => {
                         if (!result) {
@@ -47,10 +45,6 @@ exports.loginController = (req, res, next) => {
                                     message: "Authentication failed"
                                 })
                         } else {
-
-                            
-
-
                             let jwtToken = jwt.sign({
                                 email: row[0].email,
                                 userId: row[0].id
@@ -58,9 +52,6 @@ exports.loginController = (req, res, next) => {
                                 "KEY-create-authen-nodejs", {
                                 expiresIn: "1h"
                             });
-
-
-                            
                             res.status(200).json({
                                 token: jwtToken,
                                 expiresIn: 3600,
@@ -79,6 +70,24 @@ exports.loginController = (req, res, next) => {
                         message: "Authentication failed"
                     })
             }
+        })
+        .catch((error) => {
+            res.status(500)
+                .json({
+                    message: error
+                })
+        })
+}
+
+
+exports.userListController = (req, res, next) => {
+    UserModel.getUserList()
+        .then(([result]) => {
+            res.status(200)
+                .json({
+                    message: "success",
+                    data: result
+                })
         })
         .catch((error) => {
             res.status(500)

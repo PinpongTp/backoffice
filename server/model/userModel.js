@@ -16,6 +16,9 @@ class UserModel {
     static findUserByEmail ({email=''}) {
         return db.execute('SELECT * FROM admins WHERE rec_status = "active" AND admins.email = ?',[email])
     }
+    static getUserList () {
+        return db.execute('SELECT * FROM admins WHERE rec_status = "active"')
+    }
 
 }
 
