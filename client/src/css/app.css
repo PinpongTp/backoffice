@@ -1,0 +1,82 @@
+/* my layout */
+
+.flex {
+  display: flex;
+}
+.flex-center {
+  justify-content: center;
+}
+.flex-end {
+  justify-content: end;
+}
+.flex-column {
+  flex-direction: column;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.fit {
+  width: 100%;
+}
+
+.pad {
+  padding: 0.75rem;
+}
+
+.card {
+  margin-bottom: 1.5rem;
+}
+
+/* layout */
+
+.navbar {
+  /* height: 6em; */
+  height: 80px;
+  background-color: #f3f3f3;
+}
+
+/* .navbar .myname {
+  
+} */
+
+/* my style */
+
+#container {
+  min-height: calc(100vh - 180px);
+}
+
+#container aside {
+  width: 240px;
+  /* padding: 15px; */
+}
+
+#container .main {
+  width: calc(100% - 240px);
+}
+
+@media screen and (max-width: 768px) {
+  #container aside {
+    display: none;
+  }
+
+  #container .main {
+    width: 100%;
+  }
+}
+
+.footer {
+  padding: initial;
+  height: 100px;
+}
+
+#gallery .card {
+  max-width: 500px;
+  margin: 2rem auto;
+}
+
+#about section.bg {
+  background-position: center;
+  background-size: cover;
+}
