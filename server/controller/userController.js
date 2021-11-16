@@ -2,13 +2,13 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const UserModel = require('../model/userModel');
 
-exports.registerController = (req, res, next) => {
-    const { email, password } = req.body;
+exports.userCreateController = (req, res, next) => {
+    const { name, username, email, password } = req.body;
     bcrypt.hash(password, 10)
         .then((hash) => {
-            const User = new UserModel({ email: email, password: hash })
+            const User = new UserModel({ name: name, username: username, email: email, password: hash })
 
-            // เช็คก่อนว่ามีข้อมูล user ไหม
+            //Todo เช็คก่อนว่ามีข้อมูล user ไหม
 
             User.registerUser()
                 .then(() => {
@@ -32,9 +32,9 @@ exports.registerController = (req, res, next) => {
 }
 
 
-exports.loginController = (req, res, next) => {
-    const { email = '', password } = req.body;
-    UserModel.findUserByEmail({ email: email })
+exports.userLoginController = (req, res, next) => {
+    const { username = '', password } = req.body;
+    UserModel.findUserByUsername({ username: username })
         .then(([row]) => {
             if (row.length !== 0) {
                 return bcrypt.compare(password, row[0].password)
@@ -46,6 +46,8 @@ exports.loginController = (req, res, next) => {
                                 })
                         } else {
                             let jwtToken = jwt.sign({
+                                name: row[0].user,
+                                username: row[0].username,
                                 email: row[0].email,
                                 userId: row[0].id
                             },
@@ -83,6 +85,23 @@ exports.loginController = (req, res, next) => {
 exports.userListController = (req, res, next) => {
     UserModel.getUserList()
         .then(([result]) => {
+            res.status(200)
+                .json(result)
+        })
+        .catch((error) => {
+            res.status(500)
+                .json({
+                    message: error
+                })
+        })
+}
+
+exports.userDeleteController = (req, res, next) => {
+    const id = req.params.id;
+
+    UserModel.deleteUserById({id: id})
+        .then(([result]) => {
+            // todo check delete status
             res.status(200)
                 .json(result)
         })

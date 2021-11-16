@@ -1,18 +1,27 @@
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleDown, faSearch, faCheck, faUser, faTrashAlt, faUserEdit } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown, faSearch, faCheck, faUser, faTrashAlt, faUserEdit, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 //
 import Axios from 'axios'
 import { useState } from 'react'
 
 
 
-const UsersList = () => {
+const UserList = () => {
 
     const [userList, setUserList] = useState([]);
     const getUsers = () => {
         Axios.get('http://localhost:3001/user/list').then((res) => {
             setUserList(res.data)
+        })
+    }
+
+    const deleteUser = (id) => {
+        Axios.delete(`http://localhost:3001/user/delete/${id}`).then((res) => {
+
+            console.log('deleted')
+            console.log(res)
+            // setUserList(res.data)
         })
     }
 
@@ -60,15 +69,24 @@ const UsersList = () => {
                                             <td width="5%">
                                                 <FontAwesomeIcon icon={faUser} />
                                             </td>
+                                            <td>{val.name}</td>
                                             <td>{val.email}</td>
                                             <td>Admin</td>
-                                            <td className="level-right">
-                                                <Link className="button is-small is-primary" to="#">
-                                                    <FontAwesomeIcon icon={faUserEdit} />
-                                                </Link>
-                                                <Link className="button is-small is-primary" to="#">
-                                                    <FontAwesomeIcon icon={faTrashAlt} />
-                                                </Link>
+                                            <td >
+                                                <div className="level-right buttons" >
+                                                    <Link className="button is-small is-info" to="#">
+                                                        <FontAwesomeIcon icon={faUserEdit} />
+                                                    </Link>
+
+                                                    <Link 
+                                                        className="button is-small is-danger" 
+                                                        to="#"
+                                                        onClick={() => {deleteUser(val.id)}}
+                                                        >
+                                                        <FontAwesomeIcon icon={faTrashAlt} />
+                                                    </Link>
+                                                </div>
+                                                
                                             </td>
                                         </tr>
                                     )
@@ -78,8 +96,13 @@ const UsersList = () => {
                         </table>
                     </div>
                 </div>
-                <footer className="card-footer">
-                    <Link to="#" className="card-footer-item">View All</Link>
+                <footer className="card-footer ">
+                    <div className="card-footer-item buttons flex-end">
+                        <Link className="button is-small is-primary" to="#">
+                            <FontAwesomeIcon icon={faUserPlus} />
+                        </Link>
+                    </div>
+                    {/* <Link to="#" className="card-footer-item">View All</Link> */}
                 </footer>
             </div>
 
@@ -89,4 +112,4 @@ const UsersList = () => {
 }
 
 
-export default UsersList
+export default UserList

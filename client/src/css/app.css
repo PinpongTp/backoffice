@@ -6,6 +6,9 @@
 .flex-center {
   justify-content: center;
 }
+.flex-end {
+  justify-content: end;
+}
 .flex-column {
   flex-direction: column;
 }

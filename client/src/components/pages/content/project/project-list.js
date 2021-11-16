@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
-const UserAdd = () => {
+const ProjectList = () => {
 
     return (
-        <section class="content section">
+        <section className="content section">
             <h1>Hello World</h1>
             <p>Lorem ipsum<sup><Link to="#">[1]</Link></sup> dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus, nec rutrum justo nibh eu lectus. Ut vulputate semper dui. Fusce erat odio, sollicitudin vel erat vel, interdum mattis neque. Sub<sub>script</sub> works as well!</p>
             <h2>Second level</h2>
@@ -90,4 +90,4 @@ const UserAdd = () => {
 }
 
 
-export default UserAdd
+export default ProjectList

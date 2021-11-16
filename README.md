@@ -25,6 +25,7 @@ I built from scratch because I'm a PHP programmer.
 - setup JWT for register and login
 - edit directory construction file
 - create backoffice database
+- create api create and delete admins
 
 
 ## Directory

@@ -52,13 +52,13 @@ const Aside = () => {
             </p>
             <ul className="menu-list">
                 <li>
-                    <NavLink activeClassName="is-active" to="/users-list">
+                    <NavLink activeClassName="is-active" to="/user/list">
                         Manage users
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink activeClassName="is-active" to="/user-add">
-                        Add user
+                    <NavLink activeClassName="is-active" to="/user/create">
+                        Create user
                     </NavLink>
                 </li>
             </ul>

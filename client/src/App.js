@@ -14,8 +14,8 @@ import Login from "./components/pages/login";
 // profile
 import ProfileEdit from "./components/pages/profile/profile-edit"
 // user
-import UsersList from "./components/pages/user/users-list"
-import UserAdd from "./components/pages/user/user-add"
+import UserList from "./components/pages/user/user-list"
+import UserCreate from "./components/pages/user/user-create"
 // test
 
 
@@ -36,8 +36,8 @@ const DefaultContainer = () => (
         <Route exact path="/" component={Home} />
         <Route path="/home" component={Home} />
         <Route path="/profile-edit" component={ProfileEdit} />
-        <Route path="/users-list" component={UsersList} />
-        <Route path="/user-add" component={UserAdd} />
+        <Route path="/user/list" component={UserList} />
+        <Route path="/user/create" component={UserCreate} />
         <Route pate="/:id"> 404 </Route>
         <Route pate="*"> * </Route>
       </Switch>
