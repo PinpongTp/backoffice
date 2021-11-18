@@ -39,6 +39,7 @@ I built from scratch because I'm a PHP programmer.
     - website ad
     - seo
     - website theme
+- create config file
 
 ### V0.03
 #### TODO

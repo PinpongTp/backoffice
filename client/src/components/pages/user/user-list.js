@@ -5,19 +5,19 @@ import { faAngleDown, faSearch, faCheck, faUser, faTrashAlt, faUserEdit, faUserP
 import Axios from 'axios'
 import { useState } from 'react'
 
-
+const apiUrl = 'http://localhost:3001'
 
 const UserList = () => {
 
     const [userList, setUserList] = useState([]);
     const getUsers = () => {
-        Axios.get('http://localhost:3001/user/list').then((res) => {
+        Axios.get(`${apiUrl}/user/list`).then((res) => {
             setUserList(res.data)
         })
     }
 
     const deleteUser = (id) => {
-        Axios.delete(`http://localhost:3001/user/delete/${id}`).then((res) => {
+        Axios.delete(`${apiUrl}/user/delete/${id}`).then((res) => {
 
             console.log('deleted')
             console.log(res)
