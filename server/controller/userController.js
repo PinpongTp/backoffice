@@ -81,6 +81,22 @@ exports.userLoginController = (req, res, next) => {
         })
 }
 
+exports.userDataController = (req, res, next) => {
+    const id = req.params.id;
+    //
+    UserModel.getUserData({ id: id })
+        .then(([result]) => {
+            res.status(200)
+                .json(result[0])
+        })
+        .catch((error) => {
+            res.status(500)
+                .json({
+                    message: error
+                })
+        })
+}
+
 
 exports.userListController = (req, res, next) => {
     UserModel.getUserList()
@@ -98,8 +114,8 @@ exports.userListController = (req, res, next) => {
 
 exports.userDeleteController = (req, res, next) => {
     const id = req.params.id;
-
-    UserModel.deleteUserById({id: id})
+    //
+    UserModel.deleteUserById({ id: id })
         .then(([result]) => {
             // todo check delete status
             res.status(200)
@@ -112,3 +128,58 @@ exports.userDeleteController = (req, res, next) => {
                 })
         })
 }
+
+exports.userEditController = (req, res, next) => {
+    const id = req.params.id;
+    const { name, username, email } = req.body;
+
+    UserModel.getUserData({ id: id })
+        .then(([result]) => {
+
+            
+            const User = new UserModel({ id: id, name: name, username: username, email: email, password: result[0].password })
+
+            User.editUser()
+                .then(() => {
+                    res.status(200)
+                        .json({
+                            message: 'success',
+                            user: User,
+                            name: name,
+                            username, username
+                        })
+                }).catch((error) => {
+                    res.status(500)
+                        .json({
+                            message: error
+                        })
+                })
+
+        })
+        .catch((error) => {
+            res.status(500)
+                .json({
+                    message: error
+                })
+        })
+
+
+
+   
+
+    //Todo เช็คก่อนว่ามีข้อมูล user ไหม
+
+    // User.registerUser()
+    //     .then(() => {
+    //         res.status(201)
+    //             .json({
+    //                 message: 'success'
+    //             })
+    //     }).catch((error) => {
+    //         res.status(500)
+    //             .json({
+    //                 message: error
+    //             })
+    //     })
+}
+

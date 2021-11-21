@@ -9,6 +9,12 @@
 .flex-end {
   justify-content: end;
 }
+.flex-around {
+  justify-content: space-around;
+}
+.flex-between {
+  justify-content: space-between;
+}
 .flex-column {
   flex-direction: column;
 }

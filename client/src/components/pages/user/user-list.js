@@ -4,6 +4,12 @@ import { faAngleDown, faSearch, faCheck, faUser, faTrashAlt, faUserEdit, faUserP
 //
 import Axios from 'axios'
 import { useState } from 'react'
+// service
+import userService from '../../../service/user-service'
+// sweetalert
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 
 const apiUrl = 'http://localhost:3001'
 
@@ -17,15 +23,28 @@ const UserList = () => {
     }
 
     const deleteUser = (id) => {
-        Axios.delete(`${apiUrl}/user/delete/${id}`).then((res) => {
 
-            console.log('deleted')
-            console.log(res)
-            // setUserList(res.data)
+        MySwal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                userService.userDelete(id).then((res) => {
+                    MySwal.fire('Deleted!', '', 'success')
+                })
+            }
         })
+
+
+        
     }
 
     getUsers()
+
 
     return (
         <section className="section">
@@ -61,6 +80,16 @@ const UserList = () => {
                 <div className="card-table">
                     <div className="content">
                         <table className="table is-fullwidth is-striped">
+                            <thead>
+                                <tr>
+                                    <td></td>
+                                    <td>name</td>
+                                    <td>username</td>
+                                    <td>email</td>
+                                    {/* <td>permission</td> */}
+                                    <td>action</td>
+                                </tr>
+                            </thead>
                             <tbody>
 
                                 {userList.map((val, key) => {
@@ -70,23 +99,26 @@ const UserList = () => {
                                                 <FontAwesomeIcon icon={faUser} />
                                             </td>
                                             <td>{val.name}</td>
+                                            <td>{val.username}</td>
                                             <td>{val.email}</td>
-                                            <td>Admin</td>
+                                            {/* <td>Admin</td> */}
                                             <td >
                                                 <div className="level-right buttons" >
-                                                    <Link className="button is-small is-info" to="#">
+                                                    <Link
+                                                        className="button is-small is-info"
+                                                        to={`/user/edit/${val.id}`} >
                                                         <FontAwesomeIcon icon={faUserEdit} />
                                                     </Link>
 
-                                                    <Link 
-                                                        className="button is-small is-danger" 
+                                                    <Link
+                                                        className="button is-small is-danger"
                                                         to="#"
-                                                        onClick={() => {deleteUser(val.id)}}
-                                                        >
+                                                        onClick={() => { deleteUser(val.id) }}
+                                                    >
                                                         <FontAwesomeIcon icon={faTrashAlt} />
                                                     </Link>
                                                 </div>
-                                                
+
                                             </td>
                                         </tr>
                                     )
@@ -98,7 +130,7 @@ const UserList = () => {
                 </div>
                 <footer className="card-footer ">
                     <div className="card-footer-item buttons flex-end">
-                        <Link className="button is-small is-primary" to="#">
+                        <Link className="button is-small is-primary" to="/user/create">
                             <FontAwesomeIcon icon={faUserPlus} />
                         </Link>
                     </div>

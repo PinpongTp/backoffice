@@ -32,8 +32,9 @@ I built from scratch because I'm a PHP programmer.
 
 ### V0.02
 - login logout with JWT
-#### TODO
+- user and auth service
 - user management (create, update, delete)
+#### TODO
 - product management (create, update, delete)
 - website management
     - website ad

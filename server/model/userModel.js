@@ -17,6 +17,10 @@ class UserModel {
         return db.execute('INSERT INTO admins (name, username, email, password, rec_status) VALUES(?, ?, ?, ?, ?)',
         [this.name, this.username, this.email, this.password, 'active'])
     }
+    editUser() {
+        return db.execute(`UPDATE ${tableName} SET name = ?, username = ?, email = ?  WHERE id = ?`,
+        [this.name, this.username, this.email, this.id])
+    }
     static findUserByUsername ({username=''}) {
         return db.execute(`SELECT * FROM admins WHERE rec_status = "active" AND username = ?`,[username])
     }
@@ -25,6 +29,9 @@ class UserModel {
     }
     static getUserList () {
         return db.execute(`SELECT * FROM ${tableName} WHERE rec_status = "active"`)
+    }
+    static getUserData ({id=0}) {
+        return db.execute(`SELECT * FROM ${tableName} WHERE rec_status = "active" AND id = ?`, [id])
     }
     static deleteUserById ({id=0}) {
         return db.execute(`UPDATE ${tableName} SET rec_status = "inactive" WHERE id = ?`, [id])

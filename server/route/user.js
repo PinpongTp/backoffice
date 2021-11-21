@@ -5,7 +5,9 @@ const {
     userCreateController, 
     userLoginController, 
     userListController, 
-    userDeleteController
+    userDeleteController,
+    userDataController,
+    userEditController
 } = require('../controller/userController')
 
 // router.get('/', (req, res, next) => {
@@ -14,6 +16,8 @@ const {
 router.post('/create', userCreateController);
 router.post('/login', userLoginController);
 router.get('/list', userListController);
+router.post('/edit/:id', userEditController);
+router.get('/userdata/:id', userDataController);
 router.delete('/delete/:id', userDeleteController);
 
 module.exports = router;
