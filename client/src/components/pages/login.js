@@ -1,69 +1,16 @@
-// import React from "react";
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import Axios from 'axios'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-
-const MySwal = withReactContent(Swal)
+// service
+import authService from '../../service/auth-service'
 
 function Login() {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    // const storedJwt = localStorage.getItem('token');
-    // const [jwt, setJwt] = useState(storedJwt || null);
-
-    const apiUrl = 'http://localhost:3001'
-
 
     const onsubmit = () => {
-        console.log('-- login --')
-        console.log(username);
-        console.log(password);
-        login(username, password)
+        authService.login(username, password)
     }
-
-    const config = {
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    }
-
-    const login = (username, password) => { // getJwt 
-
-        console.log('login function');
-        const params = new URLSearchParams()
-        params.append('username', username)
-        params.append('password', password)
-
-        Axios.post(`${apiUrl}/user/login`, params, config).then((res) => {
-            
-
-            if (res.status === 200) { // if login
-                localStorage.setItem('token', res.data.token);
-                window.location.href = "/";
-            } else { // if not
-                //! show error code
-                console.log(res)
-
-            }
-
-        }).catch((error) => {
-            // Handle error.
-            console.log('An error occurred:', error.response);
-            MySwal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: error.response.data.message,
-            })
-
-        });
-
-        // console.log(data)
-        // localStorage.setItem('token', data.token);
-        // setJwt(data.token);
-    };
 
     return (
         <section className="section is-medium fit">

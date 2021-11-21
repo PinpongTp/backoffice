@@ -1,4 +1,11 @@
 import { NavLink, Link } from 'react-router-dom'
+// service 
+import AuthService from '../../service/auth-service'
+
+const Logout = () => {
+    AuthService.logout()
+    console.log('logout')
+}
 
 const Aside = () => {
 
@@ -89,7 +96,7 @@ const Aside = () => {
                     </ul>
                 </li>
                 <li>
-                    <Link to="/login">
+                    <Link to="/login" onClick={Logout}>
                         Logout
                     </Link>
                 </li>
