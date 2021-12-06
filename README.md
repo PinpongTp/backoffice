@@ -34,14 +34,14 @@ I built from scratch because I'm a PHP programmer.
 - login logout with JWT
 - user and auth service
 - user management (create, update, delete)
+- create config file
 #### TODO
 - product management (create, update, delete)
 - website management
     - website ad
     - seo
     - website theme
-- create config file
-
+    
 ### V0.03
 #### TODO
 - contact view
