@@ -1,4 +1,13 @@
 import { Link } from 'react-router-dom'
+import React from 'react';
+import { useState } from 'react'
+import { EditorState, convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+// service
+import noteService from '../../../service/note-service'
+// icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faAngleDown,
@@ -10,9 +19,6 @@ import {
     // faExclamationTriangle
 } from '@fortawesome/free-solid-svg-icons'
 //
-import { useState } from 'react'
-import noteService from '../../../service/note-service'
-
 
 
 const NoteCreate = () => {
@@ -22,26 +28,49 @@ const NoteCreate = () => {
     const [content, setContent] = useState("")
     const [tag, setTag] = useState("")
     const [postdate, setPostdate] = useState("")
+    const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+    // const onEditorStateChange = (editorState) => {
+    //     setEditorState(editorState)
+    // }
+
+    // const editor = React.useRef(null);
+    // function focusEditor() {
+    //     editor.current.focus();
+    // }
+
+    const uploadCallback = (file) => {
+
+        console.log(file)
+
+        return new Promise(
+            (resolve, reject) => {
+                resolve({ data: { link: "https://loremflickr.com/640/360" } });
+            }
+        );
+    }
+
 
     const createUser = () => {
-        console.log(title, subtitle, content, tag, postdate);
-        
+        console.log(title, subtitle, content, tag, postdate, editorState.getCurrentContent());
+        const contentData = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+
         const params = new URLSearchParams()
         params.append('title', title)
         params.append('subtitle', subtitle)
-        params.append('content', content)
+        params.append('content', contentData)
         params.append('tag', tag)
         params.append('postdate', postdate)
 
         //TODO validation after post to api
         noteService.Create(params).then((res) => {
 
-            if(res.status === 201){
+            if (res.status === 201) {
                 window.location.href = "/note/list";
             } else {
                 console.log(res)
             }
-            
+
         })
 
     }
@@ -69,6 +98,7 @@ const NoteCreate = () => {
                 </header>
                 <div className="card-content">
                     <div className="content">
+
                         <div className="field">
                             <label className="label">Title</label>
                             <div className="control has-icons-left">
@@ -106,17 +136,16 @@ const NoteCreate = () => {
                         <div className="field">
                             <label className="label">Content</label>
                             <div className="control has-icons-left">
-                                <input
-                                    className="input"
-                                    type="text"
-                                    placeholder="content input"
-                                    onChange={(e) => {
-                                        setContent(e.target.value)
-                                    }}
+                                <Editor
+                                    // ref={editor}
+                                    toolbarClassName="toolbarClassName"
+                                    wrapperClassName="wrapperClassName"
+                                    editorClassName="editorClassName"
+                                    editorState={editorState}
+                                    onEditorStateChange={(e) => {setEditorState(e)}}
+                                    placeholder="Write something!"
+                                    toolbar={{ image: { uploadCallback: uploadCallback }}}
                                 />
-                                <span className="icon is-small is-left">
-                                    <FontAwesomeIcon icon={faEnvelope} />
-                                </span>
                             </div>
                         </div>
 

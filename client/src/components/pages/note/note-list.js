@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import parse from 'html-react-parser';
 import { faAngleDown, faSearch, faCheck, faUser, faTrashAlt, faUserEdit, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 //
 import Axios from 'axios'
@@ -96,6 +97,7 @@ const NoteList = () => {
                                     <td></td>
                                     <td>title</td>
                                     <td>tag</td>
+                                    <td>content</td>
                                     <td>status</td>
                                     <td>post date</td>
                                     <td>action</td>
@@ -104,6 +106,13 @@ const NoteList = () => {
                             <tbody>
 
                                 {noteList.map((val, key) => {
+
+                                    if(!val.approved || val.approved <= 0) {
+                                        val.approve = 'false'
+                                    }else {
+                                        val.approve = 'true'
+                                    }
+
                                     return (
                                         <tr key={key}>
                                             <td width="5%">
@@ -111,7 +120,8 @@ const NoteList = () => {
                                             </td>
                                             <td>{val.title}</td>
                                             <td>{val.subtitle}</td>
-                                            <td>{val.content}</td>
+                                            <td><div>{parse(val.content)}</div></td>
+                                            <td>{val.approve}</td>
                                             <td>{val.postdate}</td>
                                             {/* <td>Admin</td> */}
                                             <td >
