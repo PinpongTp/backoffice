@@ -17,7 +17,8 @@ import ProfileEdit from "./components/pages/profile/profile-edit"
 import UserList from "./components/pages/user/user-list"
 import UserCreate from "./components/pages/user/user-create"
 import UserEdit from "./components/pages/user/user-edit";
-// test
+// note
+import NoteList from "./components/pages/note/note-list";
 
 //! service
 import AuthService from "./service/auth-service"
@@ -45,6 +46,7 @@ const DefaultContainer = () => {
                         <Route path="/user/list" component={UserList} />
                         <Route path="/user/create" component={UserCreate} />
                         <Route path="/user/edit/:id" component={UserEdit} />
+                        <Route path="/note/list" component={NoteList} />
                         <Route pate="/:id"> 404 </Route>
                         <Route pate="*"> * </Route>
                     </Switch>

@@ -1,4 +1,5 @@
 import Axios from "axios";
+// import { useLayoutEffect } from "react";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
@@ -33,11 +34,19 @@ class AuthService {
             }
 
         }).catch((error) => {
+
+            let text = 'error';
+            console.log(error.response)
+            if(typeof error.response !== 'undefined'){
+                text = error.response.data.message
+            }else if(typeof error !== 'undefined') {
+                text = error
+            }
             
             MySwal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: error.response.data.message,
+                text:text,
             })
 
         });

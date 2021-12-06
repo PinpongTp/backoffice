@@ -46,7 +46,7 @@ const Aside = () => {
                     <NavLink activeClassName="is-active" to="/projects-list">
                         Projects
                     </NavLink>
-                    <NavLink activeClassName="is-active" to="/notes-list">
+                    <NavLink activeClassName="is-active" to="/note/list">
                         Notes
                     </NavLink>
                     <NavLink activeClassName="is-active" to="/gallerys-list">
