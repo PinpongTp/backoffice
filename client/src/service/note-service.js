@@ -30,6 +30,16 @@ class NoteService {
         return Axios.post(`${API_URL}/create`, params, config)
     }
 
+    Upload = (params) => {
+        // return Axios.post(`${API_URL}/upload`, params, config)
+
+        return Axios.post(`${API_URL}/upload`, params, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+    }
+
 }
 
 export default new NoteService();

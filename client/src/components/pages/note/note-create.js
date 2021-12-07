@@ -43,11 +43,39 @@ const NoteCreate = () => {
 
         console.log(file)
 
+
+
         return new Promise(
             (resolve, reject) => {
-                resolve({ data: { link: "https://loremflickr.com/640/360" } });
+
+                const params = new URLSearchParams()
+                params.append('image', file)
+
+                console.log(params)
+                // return
+
+                var formData = new FormData();
+                formData.append("image", file);
+
+                console.log(file)
+
+                noteService.Upload(formData).then((res) => {
+                    console.log(res.status);
+                    console.log(res)
+
+                    if (res.status === 201) {
+                        resolve({ data: { link: "https://loremflickr.com/640/360" } });
+                    } else {
+                        console.log(res)
+                        reject()
+                    }
+                })
+
+
+
             }
         );
+
     }
 
 
@@ -142,9 +170,9 @@ const NoteCreate = () => {
                                     wrapperClassName="wrapperClassName"
                                     editorClassName="editorClassName"
                                     editorState={editorState}
-                                    onEditorStateChange={(e) => {setEditorState(e)}}
+                                    onEditorStateChange={(e) => { setEditorState(e) }}
                                     placeholder="Write something!"
-                                    toolbar={{ image: { uploadCallback: uploadCallback }}}
+                                    toolbar={{ image: { uploadCallback: uploadCallback } }}
                                 />
                             </div>
                         </div>
