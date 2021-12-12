@@ -6,11 +6,9 @@
 
 exports.UploadController = (req, res, next) => {
 
-    console.log('test')
-
     res.status(201)
         .json({
             message: 'success',
-            dataReq: req.params
+            data: req.file.filename
         })
 }

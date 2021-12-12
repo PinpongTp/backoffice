@@ -56,15 +56,15 @@ const NoteCreate = () => {
 
                 var formData = new FormData();
                 formData.append("image", file);
-
-                console.log(file)
+ 
+                // console.log(file.data.data)
 
                 noteService.Upload(formData).then((res) => {
                     console.log(res.status);
                     console.log(res)
 
                     if (res.status === 201) {
-                        resolve({ data: { link: "https://loremflickr.com/640/360" } });
+                        resolve({ data: { link: 'http://localhost:3001/data/uploads/' + res.data.data } });
                     } else {
                         console.log(res)
                         reject()

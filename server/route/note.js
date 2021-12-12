@@ -8,8 +8,6 @@ let storage = multer.diskStorage({
     destination: './public/data/uploads/',
     filename: function (req, file, cb) {
 
-        console.log(file)
-
         if (file.mimetype == 'image/jpeg') {
             cb(null, uuidv4() + '-' + Date.now() + '.jpeg') 
         } else if (file.mimetype == 'image/jpg') {
@@ -49,7 +47,7 @@ router.get('/list', ListController);
 router.post('/edit/:id', EditController);
 router.get('/data/:id', DataController);
 router.delete('/delete/:id', DeleteController);
-router.post('/upload', upload.array('image'), UploadController);
+router.post('/upload', upload.single('image'), UploadController);
 
 // router.post('/upload', upload.single('image'), function (req, res, next) {
 //     res.status(201)
