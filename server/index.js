@@ -9,6 +9,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use('/user', user)
 app.use('/note', note)
+app.use(express.static('public'))
 
 const PORT = process.env.PORT || 3001; 
 //todo what is process.env.PORT
