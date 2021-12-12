@@ -1,12 +1,44 @@
 const express = require('express');
-const multer  = require('multer');
+const multer = require('multer');
 const { UploadController } = require('../controller/fileController');
-const upload = multer({ dest: '../public/data/uploads/' })
 
-const router  = express.Router()
-const { 
-    CreateController, 
-    ListController, 
+const { v4: uuidv4 } = require('uuid');
+
+let storage = multer.diskStorage({
+    destination: './public/data/uploads/',
+    filename: function (req, file, cb) {
+
+        console.log(file)
+
+        if (file.mimetype == 'image/jpeg') {
+            cb(null, uuidv4() + '-' + Date.now() + '.jpeg') 
+        } else if (file.mimetype == 'image/jpg') {
+            cb(null, uuidv4() + '-' + Date.now() + '.jpg') 
+        } else if (file.mimetype == 'image/png') {
+            cb(null, uuidv4() + '-' + Date.now() + '.png') 
+        }
+
+    }
+})
+
+let upload = multer({
+    storage: storage,
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+            cb(null, true);
+        } else {
+            cb(null, false);
+            return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+        }
+    }
+});
+
+// const upload = multer({ dest: './public/data/uploads/' })
+
+const router = express.Router()
+const {
+    CreateController,
+    ListController,
     DeleteController,
     DataController,
     EditController
