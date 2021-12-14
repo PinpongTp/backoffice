@@ -98,6 +98,12 @@
   display: none;
 } */
 
+/* ReactTags__tags  */
+
+.ReactTags__tags .tags:not(:last-child) {
+  margin-bottom: 0;
+}
+
 /* layout */
 
 .navbar {

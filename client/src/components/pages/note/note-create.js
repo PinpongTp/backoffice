@@ -5,6 +5,7 @@ import { EditorState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { WithContext as ReactTags } from 'react-tag-input';
 // service
 import noteService from '../../../service/note-service'
 // icon
@@ -29,6 +30,53 @@ const NoteCreate = () => {
     const [tag, setTag] = useState("")
     const [postdate, setPostdate] = useState("")
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
+    const [tags, setTags] = useState([]);
+
+
+    const KeyCodes = {
+        comma: 188,
+        enter: 13,
+    };
+
+    const delimiters = [KeyCodes.comma, KeyCodes.enter];
+
+    const handleDelete = (i) => {
+        setTags(tags.filter((tag, index) => index !== i));
+    };
+
+    const handleAddition = (tag) => {
+        console.log(tag)
+        setTags([...tags, tag]);
+        console.log(tags)
+    };
+
+    const handleDrag = (tag, currPos, newPos) => {
+        const newTags = [...tags].slice();
+
+        newTags.splice(currPos, 1);
+        newTags.splice(newPos, 0, tag);
+
+        setTags(newTags);
+    };
+
+    const handleTagClick = (index) => {
+        console.log("The tag at index " + index + " was clicked");
+    };
+
+    const onClearAll = () => {
+        setTags([]);
+    };
+
+    const onTagUpdate = (i, newTag) => {
+
+        console.log('onTagUpdate')
+
+        const updatedTags = tags.slice();
+        updatedTags.splice(i, 1, newTag);
+        setTags(updatedTags);
+    };
+
+
 
     // const onEditorStateChange = (editorState) => {
     //     setEditorState(editorState)
@@ -56,7 +104,7 @@ const NoteCreate = () => {
 
                 var formData = new FormData();
                 formData.append("image", file);
- 
+
                 // console.log(file.data.data)
 
                 noteService.Upload(formData).then((res) => {
@@ -210,6 +258,30 @@ const NoteCreate = () => {
                                 </span>
                             </div>
                         </div>
+
+                        <div className="field">
+                            <label className="label">Tags</label>
+                            <div className="control">
+                                <ReactTags
+                                    inline={false}
+                                    handleDelete={handleDelete}
+                                    handleAddition={handleAddition}
+                                    handleDrag={handleDrag}
+                                    delimiters={delimiters}
+                                    handleTagClick={handleTagClick}
+                                    onClearAll={onClearAll}
+                                    onTagUpdate={onTagUpdate}
+                                    tags={tags}
+                                    classNames={{
+                                        tagInputField: 'input',
+                                        selected: 'tags',
+                                        tag: 'tag is-primary',
+                                        remove: 'delete is-small'
+                                    }}
+                                />
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <footer className="card-footer ">
