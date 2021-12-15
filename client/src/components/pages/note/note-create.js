@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import React from 'react';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { EditorState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import { Editor } from "react-draft-wysiwyg";
@@ -32,6 +32,9 @@ const NoteCreate = () => {
     const [postdate, setPostdate] = useState("")
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
     const [tags, setTags] = useState([]);
+
+    const [thumbnail, setThumbnail] = useState(null)
+    const [filename, setFilename] = useState("No file uploaded") // for file input
 
 
     const KeyCodes = {
@@ -77,6 +80,10 @@ const NoteCreate = () => {
         setTags(updatedTags);
     };
 
+    useEffect(() => {
+        console.log(thumbnail)
+    });
+
 
 
     // const onEditorStateChange = (editorState) => {
@@ -89,7 +96,12 @@ const NoteCreate = () => {
     // }
 
     const uploadThumbnail = (file) => {
-        console.log(file)
+
+        if (file) {
+            setFilename(file.name)
+            setThumbnail(file)
+        }
+
     }
 
     const uploadCallback = (file) => {
@@ -205,7 +217,7 @@ const NoteCreate = () => {
                                             </span>
                                         </span>
                                         <span className="file-name">
-                                            No file uploaded
+                                            {filename}
                                         </span>
                                     </label>
                                 </div>
@@ -302,10 +314,10 @@ const NoteCreate = () => {
                             <div className="control">
                                 <div className="control">
                                     <label className="radio">
-                                        <input type="radio" name="answer"/> Show
+                                        <input type="radio" name="answer" /> Show
                                     </label>
                                     <label className="radio">
-                                        <input type="radio" name="answer" checked /> Not show
+                                        <input type="radio" name="answer" /> Not show
                                     </label>
                                 </div>
                             </div>
