@@ -15,6 +15,7 @@ import {
     faLock,
     faUser,
     faUserPlus,
+    faUpload,
     faEnvelope
     // faCheck,
     // faExclamationTriangle
@@ -87,6 +88,10 @@ const NoteCreate = () => {
     //     editor.current.focus();
     // }
 
+    const uploadThumbnail = (file) => {
+        console.log(file)
+    }
+
     const uploadCallback = (file) => {
 
         console.log(file)
@@ -135,7 +140,7 @@ const NoteCreate = () => {
         params.append('title', title)
         params.append('subtitle', subtitle)
         params.append('content', contentData)
-        params.append('tag', tag)
+        params.append('tag', tags)
         params.append('postdate', postdate)
 
         //TODO validation after post to api
@@ -175,9 +180,45 @@ const NoteCreate = () => {
                 <div className="card-content">
                     <div className="content">
 
+
+
+                        <div className="field">
+                            <label className="label">Thumbnail</label>
+                            <div className="control has-icons-left">
+                                <div className="file is-right is-fullwidth">
+                                    <label className="file-label">
+                                        <input
+                                            className="file-input"
+                                            type="file"
+                                            name="resume"
+                                            onChange={(e) => {
+                                                uploadThumbnail(e.target.files[0])
+                                            }}
+                                        />
+                                        <span className="file-cta">
+                                            <span className="file-icon">
+                                                <FontAwesomeIcon icon={faUpload} />
+                                                {/* <i className="fas fa-upload"></i> */}
+                                            </span>
+                                            <span className="file-label">
+                                                Choose a file…
+                                            </span>
+                                        </span>
+                                        <span className="file-name">
+                                            No file uploaded
+                                        </span>
+                                    </label>
+                                </div>
+
+                                {/* <span className="icon is-small is-left">
+                                    <FontAwesomeIcon icon={faUser} />
+                                </span> */}
+                            </div>
+                        </div>
+
                         <div className="field">
                             <label className="label">Title</label>
-                            <div className="control has-icons-left">
+                            <div className="control">
                                 <input
                                     className="input"
                                     type="text"
@@ -186,15 +227,12 @@ const NoteCreate = () => {
                                         setTitle(e.target.value)
                                     }}
                                 />
-                                <span className="icon is-small is-left">
-                                    <FontAwesomeIcon icon={faUser} />
-                                </span>
                             </div>
                         </div>
 
                         <div className="field">
                             <label className="label">Subtitle</label>
-                            <div className="control has-icons-left">
+                            <div className="control">
                                 <input
                                     className="input"
                                     type="text"
@@ -203,9 +241,6 @@ const NoteCreate = () => {
                                         setSubtitle(e.target.value)
                                     }}
                                 />
-                                <span className="icon is-small is-left">
-                                    <FontAwesomeIcon icon={faUser} />
-                                </span>
                             </div>
                         </div>
 
@@ -226,25 +261,8 @@ const NoteCreate = () => {
                         </div>
 
                         <div className="field">
-                            <label className="label">Tag</label>
-                            <div className="control has-icons-left">
-                                <input
-                                    className="input"
-                                    type="text"
-                                    placeholder="tag"
-                                    onChange={(e) => {
-                                        setTag(e.target.value)
-                                    }}
-                                />
-                                <span className="icon is-small is-left">
-                                    <FontAwesomeIcon icon={faLock} />
-                                </span>
-                            </div>
-                        </div>
-
-                        <div className="field">
                             <label className="label">Postdate</label>
-                            <div className="control has-icons-left">
+                            <div className="control">
                                 <input
                                     className="input"
                                     type="datetime-local"
@@ -253,9 +271,6 @@ const NoteCreate = () => {
                                         setPostdate(e.target.value)
                                     }}
                                 />
-                                <span className="icon is-small is-left">
-                                    <FontAwesomeIcon icon={faLock} />
-                                </span>
                             </div>
                         </div>
 
@@ -279,6 +294,20 @@ const NoteCreate = () => {
                                         remove: 'delete is-small'
                                     }}
                                 />
+                            </div>
+                        </div>
+
+                        <div className="field">
+                            <label className="label">Approve</label>
+                            <div className="control">
+                                <div className="control">
+                                    <label className="radio">
+                                        <input type="radio" name="answer"/> Show
+                                    </label>
+                                    <label className="radio">
+                                        <input type="radio" name="answer" checked /> Not show
+                                    </label>
+                                </div>
                             </div>
                         </div>
 
