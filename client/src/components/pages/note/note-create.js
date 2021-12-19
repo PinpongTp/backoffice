@@ -140,18 +140,7 @@ const NoteCreate = () => {
 
 
     const createUser = () => {
-        // console.log(title, subtitle, tags, postdate, editorState.getCurrentContent());
         const content = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-
-        console.log('--- submit ---')
-        console.log('thumbnail', thumbnail)
-        console.log('title', title)
-        console.log('subtitle', subtitle)
-        console.log('content', content)
-        console.log('postdate', postdate)
-        console.log('tags', tags)
-        console.log('approve', approve)
-        // console.log('postdate', postdate)
 
         let formData = new FormData();
         // const params = new URLSearchParams()        
