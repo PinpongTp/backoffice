@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import parse from 'html-react-parser';
-import { faAngleDown, faSearch, faCheck, faTrashAlt, faUserEdit, faUserPlus, faFile } from '@fortawesome/free-solid-svg-icons'
+import parse from 'html-react-parser';
+import { faAngleDown, faSearch, faCheck, faUser, faTrashAlt, faUserEdit, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 //
-// import Axios from 'axios'
+import Axios from 'axios'
 import { useEffect, useState } from 'react'
 // service
 import noteService from '../../../service/note-service'
@@ -12,34 +12,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
 
-const TagsRender = (data) => {
-    let tagsData = data.tagsData
-    if (tagsData && tagsData != '') {
-        return (
-            <div className='tags'>
-                {JSON.parse(tagsData).map((tagVal, tagKey) => {
-                    return (
-                        <span className='tag is-primary' key={tagKey}>{tagVal.text}</span>
-                    )
-                })}
-            </div>
-        )
-    }
-    return <></>
-}
-
-// !todo approve not save
-
-const Approve = (data) => {
-    let approveData = data.approveData
-    if (approveData === 'true') {
-        return <span className='tag is-primary'>approve</span>
-    }else {
-        return <span className='tag is-primary'>not approve</span>
-    }
-}
-
-const NoteList = () => {
+const NoteView = () => {
 
     const [init, setInit] = useState(true)
     const [noteList, setNoteList] = useState([]);
@@ -48,6 +21,8 @@ const NoteList = () => {
         noteService.DataList().then((res) => {
             setNoteList(res.data)
             setInit(false)
+
+            console.log(noteList)
         })
 
     }
@@ -71,17 +46,17 @@ const NoteList = () => {
         })
 
 
-
+        
     }
 
     useEffect(() => {
-        if (init) {
+        if(init){
             getDataList()
         }
     })
 
 
-
+    
 
     return (
         <section className="section">
@@ -105,7 +80,7 @@ const NoteList = () => {
             <div className="card events-card">
                 <header className="card-header">
                     <p className="card-header-title">
-                        <FontAwesomeIcon icon={faFile} style={{ marginRight: '1em' }} />  Notes list
+                        Notes view
                     </p>
                     <Link to="#" className="card-header-icon" aria-label="more options">
                         <span className="icon">
@@ -119,10 +94,11 @@ const NoteList = () => {
                         <table className="table is-fullwidth is-striped">
                             <thead>
                                 <tr>
+                                    <td></td>
                                     <td>title</td>
-                                    <td>subtitle</td>
-                                    {/* <td>tag</td> */}
-                                    <td>approve</td>
+                                    <td>tag</td>
+                                    <td>content</td>
+                                    <td>status</td>
                                     <td>post date</td>
                                     <td>action</td>
                                 </tr>
@@ -131,18 +107,21 @@ const NoteList = () => {
 
                                 {noteList.map((val, key) => {
 
-                                    if (!val.approved || val.approved <= 0) {
+                                    if(!val.approved || val.approved <= 0) {
                                         val.approve = 'false'
-                                    } else {
+                                    }else {
                                         val.approve = 'true'
                                     }
 
                                     return (
                                         <tr key={key}>
+                                            <td width="5%">
+                                                <FontAwesomeIcon icon={faUser} />
+                                            </td>
                                             <td>{val.title}</td>
                                             <td>{val.subtitle}</td>
-                                            {/* <td><TagsRender tagsData={val.tags} /></td> */}
-                                            <td><Approve approveData={val.approve}/></td>
+                                            <td><div>{parse(val.content)}</div></td>
+                                            <td>{val.approve}</td>
                                             <td>{val.postdate}</td>
                                             {/* <td>Admin</td> */}
                                             <td >
@@ -190,4 +169,4 @@ const NoteList = () => {
 }
 
 
-export default NoteList
+export default NoteView

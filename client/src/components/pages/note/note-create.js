@@ -149,7 +149,7 @@ const NoteCreate = () => {
         formData.append('title', title)
         formData.append('subtitle', subtitle)
         formData.append('content', content)
-        formData.append('tags', tags)
+        formData.append('tags', JSON.stringify(tags))
         formData.append('postdate', postdate)
         formData.append('approve', approve)
 
