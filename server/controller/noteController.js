@@ -10,8 +10,17 @@ const NoteModel = require('../model/noteModel');
 // get list /
 
 exports.CreateController = (req, res, next) => {
-    const { title, subtitle, content, postdate } = req.body;
-    const Data = new NoteModel(({ title: title, subtitle: subtitle, content: content, postdate: postdate }))
+
+    const { title, subtitle, content, postdate, tags, approve } = req.body;
+    const thumbnail = req.file.filename
+    const approveDate = (approve === 'true') ? Date.now() : 0 ; // get unix time
+
+    const Data = new NoteModel(({ thumbnail: thumbnail, title: title, subtitle: subtitle, content: content, postdate: postdate, approve: approveDate, tags: tags }))
+
+    console.log('Data')
+    console.log(Data)
+    
+
 
     Data.insert()
         .then(() => {
@@ -20,6 +29,9 @@ exports.CreateController = (req, res, next) => {
                     message: 'success'
                 })
         }).catch((error) => {
+
+            console.log(error)
+
             res.status(500)
                 .json({
                     message: error

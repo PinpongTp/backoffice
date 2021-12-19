@@ -27,12 +27,15 @@ class NoteService {
     }
 
     Create = (params) => {
-        return Axios.post(`${API_URL}/create`, params, config)
+        return Axios.post(`${API_URL}/create`, params, {
+            headers: {
+                // ? config this for upload file with form data.
+                'Content-Type': 'multipart/form-data'
+            }
+        })
     }
 
     Upload = (params) => {
-        // return Axios.post(`${API_URL}/upload`, params, config)
-
         return Axios.post(`${API_URL}/upload`, params, {
             headers: {
                 'Content-Type': 'multipart/form-data'

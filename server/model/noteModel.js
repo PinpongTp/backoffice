@@ -3,25 +3,29 @@ const tableName = "notes"
 
 class NoteModel {
 
-    constructor({title='', subtitle='', content='', postdate='', id=0}) {
+    constructor({title='', subtitle='', content='', thumbnail='', tags='', postdate='', approve=0 , id=0}) {
         this.title = title
         this.subtitle = subtitle
         this.content = content
         this.postdate = postdate
+        this.thumbnail = thumbnail
+        this.approve = approve
+        this.tags = tags
         this.id = id
         this.rec_added = new Date()
         this.rec_update = new Date()
-        this.rec_status = ''
+        // this.rec_status = ''
     }
 
     insert() {
-        return db.execute(`INSERT INTO  ${tableName} (title, subtitle, content, postdate, rec_status) VALUES(?, ?, ?, ?, ?)`,
-        [this.title, this.subtitle, this.content, this.postdate, 'active'])
+        return db.execute(`INSERT INTO  ${tableName} (title, subtitle, content, thumbnail, tags, postdate, rec_status) VALUES(?, ?, ?, ?, ?, ?, ?)`,
+        [this.title, this.subtitle, this.content, this.thumbnail, this.tags, this.postdate, 'active'])
     }
-    update() {
-        return db.execute(`UPDATE ${tableName} SET name = ?, username = ?, email = ?  WHERE id = ?`,
-        [this.name, this.username, this.email, this.id])
-    }
+    // Todo
+    // update() { 
+    //     return db.execute(`UPDATE ${tableName} SET name = ?, username = ?, email = ?  WHERE id = ?`,
+    //     [this.name, this.username, this.email, this.id])
+    // }
     static findBy ({field='',data=''}) {
         return db.execute(`SELECT * FROM ${tableName} WHERE rec_status = "active" AND ? = ?`,[field, data])
     }

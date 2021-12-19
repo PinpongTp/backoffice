@@ -31,8 +31,6 @@ let upload = multer({
     }
 });
 
-// const upload = multer({ dest: './public/data/uploads/' })
-
 const router = express.Router()
 const {
     CreateController,
@@ -42,21 +40,11 @@ const {
     EditController
 } = require('../controller/noteController')
 
-router.post('/create', CreateController);
+router.post('/create', upload.single('thumbnail'), CreateController);
 router.get('/list', ListController);
 router.post('/edit/:id', EditController);
 router.get('/data/:id', DataController);
 router.delete('/delete/:id', DeleteController);
 router.post('/upload', upload.single('image'), UploadController);
-
-// router.post('/upload', upload.single('image'), function (req, res, next) {
-//     res.status(201)
-//     .json({
-//         message: 'success',
-//         req: req
-//     })
-// })
-
-
 
 module.exports = router;

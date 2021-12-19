@@ -27,11 +27,12 @@ const NoteCreate = () => {
 
     const [title, setTitle] = useState("")
     const [subtitle, setSubtitle] = useState("")
-    const [content, setContent] = useState("")
-    const [tag, setTag] = useState("")
+    // const [content, setContent] = useState("")
+    // const [tag, setTag] = useState("")
     const [postdate, setPostdate] = useState("")
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
     const [tags, setTags] = useState([]);
+    const [approve, setApprove] = useState(false)
 
     const [thumbnail, setThumbnail] = useState(null)
     const [filename, setFilename] = useState("No file uploaded") // for file input
@@ -49,9 +50,9 @@ const NoteCreate = () => {
     };
 
     const handleAddition = (tag) => {
-        console.log(tag)
+        // console.log(tag)
         setTags([...tags, tag]);
-        console.log(tags)
+        // console.log(tags)
     };
 
     const handleDrag = (tag, currPos, newPos) => {
@@ -81,7 +82,7 @@ const NoteCreate = () => {
     };
 
     useEffect(() => {
-        console.log(thumbnail)
+        // console.log(thumbnail)
     });
 
 
@@ -113,12 +114,6 @@ const NoteCreate = () => {
         return new Promise(
             (resolve, reject) => {
 
-                const params = new URLSearchParams()
-                params.append('image', file)
-
-                console.log(params)
-                // return
-
                 var formData = new FormData();
                 formData.append("image", file);
 
@@ -145,18 +140,32 @@ const NoteCreate = () => {
 
 
     const createUser = () => {
-        console.log(title, subtitle, content, tag, postdate, editorState.getCurrentContent());
-        const contentData = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+        // console.log(title, subtitle, tags, postdate, editorState.getCurrentContent());
+        const content = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 
-        const params = new URLSearchParams()
-        params.append('title', title)
-        params.append('subtitle', subtitle)
-        params.append('content', contentData)
-        params.append('tag', tags)
-        params.append('postdate', postdate)
+        console.log('--- submit ---')
+        console.log('thumbnail', thumbnail)
+        console.log('title', title)
+        console.log('subtitle', subtitle)
+        console.log('content', content)
+        console.log('postdate', postdate)
+        console.log('tags', tags)
+        console.log('approve', approve)
+        // console.log('postdate', postdate)
+
+        let formData = new FormData();
+        // const params = new URLSearchParams()        
+        // ? append data in params
+        formData.append('thumbnail', thumbnail)
+        formData.append('title', title)
+        formData.append('subtitle', subtitle)
+        formData.append('content', content)
+        formData.append('tags', tags)
+        formData.append('postdate', postdate)
+        formData.append('approve', approve)
 
         //TODO validation after post to api
-        noteService.Create(params).then((res) => {
+        noteService.Create(formData).then((res) => {
 
             if (res.status === 201) {
                 window.location.href = "/note/list";
@@ -314,10 +323,10 @@ const NoteCreate = () => {
                             <div className="control">
                                 <div className="control">
                                     <label className="radio">
-                                        <input type="radio" name="answer" /> Show
+                                        <input type="radio" checked={approve === true} onChange={() => setApprove(true)} /> Show
                                     </label>
                                     <label className="radio">
-                                        <input type="radio" name="answer" /> Not show
+                                        <input type="radio"  checked={approve === false} onChange={() => setApprove(false)} /> Not show
                                     </label>
                                 </div>
                             </div>
