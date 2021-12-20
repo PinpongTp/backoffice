@@ -33,25 +33,30 @@ I built from scratch because I'm a PHP programmer.
 ### V0.02
 - login logout with JWT
 - user and auth service
-- user management (create, update, delete)
+- user management (list, create, update, delete)
+- note management (create, delete)
 - create config file
+- upload files
+- input tags
+- input wysiwyg
 #### TODO
-- product management (create, update, delete)
-- website management
-    - website ad
-    - seo
-    - website theme
+- note management (list, update)
+
     
 ### V0.03
 #### TODO
 - contact view
-- upload picture
 - sent mail
-- blog management (create, update, delete)
+- website management
+    - website ad
+    - seo
+    - website theme
+- auto delete files
 
 ### V0.04
 #### TODO
 - admin permission
+- service management
 
 ## Directory
 
