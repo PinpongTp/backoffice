@@ -28,16 +28,13 @@ const TagsRender = (data) => {
     return <></>
 }
 
-// !todo approve not save
+/*
+    todo approve not save
+    todo create view note page
 
-const Approve = (data) => {
-    let approveData = data.approveData
-    if (approveData === 'true') {
-        return <span className='tag is-primary'>approve</span>
-    }else {
-        return <span className='tag is-primary'>not approve</span>
-    }
-}
+    ? note bug
+    ? - on create , can't set status to true
+*/
 
 const NoteList = () => {
 
@@ -69,19 +66,44 @@ const NoteList = () => {
                 })
             }
         })
-
-
-
     }
+
+    const Approve = (data) => {
+        if (data.approveData === 'true') {
+            return <Link to="#" onClick={() => {approveById(data.approveData, data.id)}} className='tag is-primary'>approve</Link>
+        }else {
+            return <Link to="#" onClick={() => {approveById(data.approveData, data.id)}} className='tag is-primary'>not approve</Link>
+        }
+    }
+
+    const approveById = (id, val) => {
+
+        console.log('Approve by id')
+        console.log(id, val)
+
+        MySwal.fire({
+            title: 'Are you sure?',
+            text: val === true ? 'Update to approve' : 'Update to not approve',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#00d1b2',
+            confirmButtonText: val === true ? 'Yes, approve' : 'Yes, not approve'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                noteService.Delete(id).then((res) => {
+                    MySwal.fire('Updated!', '', 'success')
+                    getDataList()
+                })
+            }
+        })
+    }
+
 
     useEffect(() => {
         if (init) {
             getDataList()
         }
     })
-
-
-
 
     return (
         <section className="section">
@@ -142,7 +164,7 @@ const NoteList = () => {
                                             <td>{val.title}</td>
                                             <td>{val.subtitle}</td>
                                             {/* <td><TagsRender tagsData={val.tags} /></td> */}
-                                            <td><Approve approveData={val.approve}/></td>
+                                            <td><Approve approveData={val.approve} id={val.id}/></td>
                                             <td>{val.postdate}</td>
                                             {/* <td>Admin</td> */}
                                             <td >
