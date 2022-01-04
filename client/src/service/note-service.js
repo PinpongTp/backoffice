@@ -19,7 +19,16 @@ class NoteService {
     }
 
     Update = (id, params) => {
-        return Axios.post(`${API_URL}/edit/${id}`, params, config)
+
+        console.log(id)
+        console.log(params)
+        console.log('Update in service')
+
+        return Axios.post(`${API_URL}/edit/${id}`, params, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
     }
 
     Delete = (id) => {

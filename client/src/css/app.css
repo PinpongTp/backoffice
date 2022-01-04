@@ -18,6 +18,9 @@
 .flex-column {
   flex-direction: column;
 }
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
 
 .text-center {
   text-align: center;

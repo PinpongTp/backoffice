@@ -34,14 +34,11 @@ I built from scratch because I'm a PHP programmer.
 - login logout with JWT
 - user and auth service
 - user management (list, create, update, delete)
-- note management (create, delete)
+- note management (list, create, update, delete)
 - create config file
 - upload files
 - input tags
 - input wysiwyg
-#### TODO
-- note management (list, update)
-
     
 ### V0.03
 #### TODO
@@ -52,6 +49,8 @@ I built from scratch because I'm a PHP programmer.
     - seo
     - website theme
 - auto delete files
+- note management (validate)
+- user management (validate)
 
 ### V0.04
 #### TODO

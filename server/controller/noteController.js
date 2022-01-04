@@ -13,14 +13,7 @@ exports.CreateController = (req, res, next) => {
 
     const { title, subtitle, content, postdate, tags, approve } = req.body;
     const thumbnail = req.file.filename
-    // const approveDate = (approve === 'true') ? Date.now() : 0 ; // get unix time
-
     const Data = new NoteModel(({ thumbnail: thumbnail, title: title, subtitle: subtitle, content: content, postdate: postdate, approve: approve, tags: tags }))
-
-    console.log('Data')
-    console.log(Data)
-    
-
 
     Data.insert()
         .then(() => {
@@ -91,6 +84,8 @@ exports.DeleteController = (req, res, next) => {
 exports.UpdateApproveController = (req, res, next) => {
     const id = req.params.id;
     const { approve } = req.body;
+
+    console.log(approve)
     //
     NoteModel.UpdateApproveById({ id: id, approved: approve})
         .then(([result]) => {
@@ -107,14 +102,14 @@ exports.UpdateApproveController = (req, res, next) => {
 
 exports.EditController = (req, res, next) => {
     const id = req.params.id;
-    const { title, subtitle, content, postdate } = req.body;
+    const { title, subtitle, content, postdate, tags, approve } = req.body;
 
-    NoteModel.getUserData({ id: id })
+    NoteModel.findById({ id: id })
         .then(([result]) => {
+            const thumbnail = req.file ? req.file.filename : result[0].thumbnail;
+            const Data = new NoteModel(({ id: id, thumbnail: thumbnail, title: title, subtitle: subtitle, content: content, postdate: postdate, approve: approve, tags: tags }))
 
-            const Data = new NoteModel({ id: id, title: title, subtitle: subtitle, content: content, postdate: postdate })
-
-            Data.editUser()
+            Data.update()
                 .then(() => {
                     res.status(200)
                         .json({

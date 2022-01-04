@@ -6,22 +6,28 @@ import draftToHtml from 'draftjs-to-html';
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { WithContext as ReactTags } from 'react-tag-input';
+// config
+import configData from "../../../config/config.json"
 // service
 import noteService from '../../../service/note-service'
 // icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faAngleDown,
-    faLock,
-    faUser,
+    // faLock,
+    faEye,
     faUserPlus,
     faUpload,
-    faEnvelope
+    // faEnvelope
     // faCheck,
     // faExclamationTriangle
 } from '@fortawesome/free-solid-svg-icons'
-//
+// sweetalert
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 
+const PUBLIC_URL = configData.API_URL + '/data/uploads/';
 
 const NoteCreate = () => {
 
@@ -140,7 +146,7 @@ const NoteCreate = () => {
     }
 
 
-    const createUser = () => {
+    const createNote = () => {
         const content = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 
         let formData = new FormData();
@@ -190,11 +196,28 @@ const NoteCreate = () => {
                 </header>
                 <div className="card-content">
                     <div className="content">
-
-
-
                         <div className="field">
                             <label className="label">Thumbnail</label>
+
+                            {
+                                thumbnail !== null ?
+                                <div style={{paddingBottom: "0.5rem"}}>
+                                    <Link
+                                        className="button is-small is-primary"
+                                        to="#"
+                                        onClick={() => {
+                                            MySwal.fire({
+                                                imageUrl: PUBLIC_URL + thumbnail,
+                                                imageAlt: 'thumbnail'
+                                            })
+                                        }}
+                                    >
+                                        <FontAwesomeIcon icon={faEye} /> Thumbnail
+                                    </Link>
+                                </div>
+                                :null
+                            }
+
                             <div className="control has-icons-left">
                                 <div className="file is-right is-fullwidth">
                                     <label className="file-label">
@@ -325,8 +348,11 @@ const NoteCreate = () => {
                     </div>
                 </div>
                 <footer className="card-footer ">
-                    <div className="card-footer-item buttons flex-end">
-                        <button className="button is-primary" onClick={createUser}>
+                    <div className="card-footer-item buttons flex-between">
+                        <Link className="button is-light" to="/note/list">
+                            <p className="pad">Cancel</p>
+                        </Link>
+                        <button className="button is-primary" onClick={createNote}>
                             <FontAwesomeIcon icon={faUserPlus} />
                             <p className="pad">Create</p>
                         </button>

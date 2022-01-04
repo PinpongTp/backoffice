@@ -43,7 +43,7 @@ const {
 
 router.post('/create', upload.single('thumbnail'), CreateController);
 router.get('/list', ListController);
-router.post('/edit/:id', EditController);
+router.post('/edit/:id', upload.single('thumbnail'), EditController);
 router.get('/data/:id', DataController);
 router.delete('/delete/:id', DeleteController);
 router.post('/upload', upload.single('image'), UploadController);

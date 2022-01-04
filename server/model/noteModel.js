@@ -3,7 +3,7 @@ const tableName = "notes"
 
 class NoteModel {
 
-    constructor({title='', subtitle='', content='', thumbnail='', tags='', postdate='', approve=0 , id=0}) {
+    constructor({title='', subtitle='', content='', thumbnail='', tags='', postdate='', approve=0 , id=0, rec_status='active'}) {
         this.title = title
         this.subtitle = subtitle
         this.content = content
@@ -14,6 +14,7 @@ class NoteModel {
         this.id = id
         this.rec_added = new Date()
         this.rec_update = new Date()
+        this.rec_status = rec_status
         // this.rec_status = ''
     }
 
@@ -23,10 +24,17 @@ class NoteModel {
     }
     // Todo 
     // Todo update by field
-    // update() { 
-    //     return db.execute(`UPDATE ${tableName} SET name = ?, username = ?, email = ?  WHERE id = ?`,
-    //     [this.name, this.username, this.email, this.id])
-    // }
+    update() { 
+        return db.execute(`UPDATE ${tableName} SET title = ?, subtitle = ?, content = ?, thumbnail = ?, tags = ?, approved = ?, postdate = ?, rec_update = ? WHERE id = ? `,
+        [this.title, this.subtitle, this.content, this.thumbnail, this.tags, this.approved, this.postdate, this.rec_update, this.id])
+    }
+
+    editUser() {
+        return db.execute(`UPDATE ${tableName} SET name = ?, username = ?, email = ?  WHERE id = ?`,
+        [this.name, this.username, this.email, this.id])
+    }
+
+
     static findBy ({field='',data=''}) {
         return db.execute(`SELECT * FROM ${tableName} WHERE rec_status = "active" AND ? = ?`,[field, data])
     }

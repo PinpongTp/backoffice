@@ -20,6 +20,7 @@ import UserEdit from "./components/pages/user/user-edit";
 // note
 import NoteList from "./components/pages/note/note-list";
 import NoteCreate from "./components/pages/note/note-create";
+import NoteEdit from "./components/pages/note/note-edit";
 
 //! service
 import AuthService from "./service/auth-service"
@@ -49,6 +50,7 @@ const DefaultContainer = () => {
                         <Route path="/user/edit/:id" component={UserEdit} />
                         <Route path="/note/list" component={NoteList} />
                         <Route path="/note/create" component={NoteCreate} />
+                        <Route path="/note/edit/:id" component={NoteEdit} />
                         <Route pate="/:id"> 404 </Route>
                         <Route pate="*"> * </Route>
                     </Switch>

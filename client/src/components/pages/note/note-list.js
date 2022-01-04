@@ -12,25 +12,24 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
 
-const TagsRender = (data) => {
-    let tagsData = data.tagsData
-    if (tagsData && tagsData != '') {
-        return (
-            <div className='tags'>
-                {JSON.parse(tagsData).map((tagVal, tagKey) => {
-                    return (
-                        <span className='tag is-primary' key={tagKey}>{tagVal.text}</span>
-                    )
-                })}
-            </div>
-        )
-    }
-    return <></>
-}
+// const TagsRender = (data) => {
+//     let tagsData = data.tagsData
+//     if (tagsData && tagsData !== '') {
+//         return (
+//             <div className='tags'>
+//                 {JSON.parse(tagsData).map((tagVal, tagKey) => {
+//                     return (
+//                         <span className='tag is-primary' key={tagKey}>{tagVal.text}</span>
+//                     )
+//                 })}
+//             </div>
+//         )
+//     }
+//     return <></>
+// }
 
 /*
-    todo approve not save
-    todo create view note page
+    todo create view note page || edit
 
     ? note bug
     ? - on create , can't set status to true
@@ -187,10 +186,10 @@ const NoteList = () => {
                                             <td>{new Date(val.postdate).toLocaleDateString()} {new Date(val.postdate).toLocaleTimeString()}</td>
                                             {/* <td>Admin</td> */}
                                             <td >
-                                                <div className="level-right buttons" >
+                                                <div className="level-right buttons flex-nowrap" >
                                                     <Link
                                                         className="button is-small is-info"
-                                                        to={`/user/edit/${val.id}`} >
+                                                        to={`/note/edit/${val.id}`} >
                                                         <FontAwesomeIcon icon={faUserEdit} />
                                                     </Link>
 
