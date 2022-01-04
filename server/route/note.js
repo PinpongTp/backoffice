@@ -37,7 +37,8 @@ const {
     ListController,
     DeleteController,
     DataController,
-    EditController
+    EditController,
+    UpdateApproveController
 } = require('../controller/noteController')
 
 router.post('/create', upload.single('thumbnail'), CreateController);
@@ -46,5 +47,6 @@ router.post('/edit/:id', EditController);
 router.get('/data/:id', DataController);
 router.delete('/delete/:id', DeleteController);
 router.post('/upload', upload.single('image'), UploadController);
+router.post('/updateApprove/:id', UpdateApproveController);
 
 module.exports = router;

@@ -32,7 +32,7 @@ const NoteCreate = () => {
     const [postdate, setPostdate] = useState("")
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
     const [tags, setTags] = useState([]);
-    const [approve, setApprove] = useState(false)
+    const [approve, setApprove] = useState(0)
 
     const [thumbnail, setThumbnail] = useState(null)
     const [filename, setFilename] = useState("No file uploaded") // for file input
@@ -83,6 +83,7 @@ const NoteCreate = () => {
 
     useEffect(() => {
         // console.log(thumbnail)
+        console.log(approve)
     });
 
 
@@ -312,10 +313,10 @@ const NoteCreate = () => {
                             <div className="control">
                                 <div className="control">
                                     <label className="radio">
-                                        <input type="radio" checked={approve === true} onChange={() => setApprove(true)} /> Show
+                                        <input type="radio" checked={approve !== 0} onChange={() => setApprove(Date.now())} /> Show
                                     </label>
                                     <label className="radio">
-                                        <input type="radio"  checked={approve === false} onChange={() => setApprove(false)} /> Not show
+                                        <input type="radio"  checked={approve === 0} onChange={() => setApprove(0)} /> Not show
                                     </label>
                                 </div>
                             </div>

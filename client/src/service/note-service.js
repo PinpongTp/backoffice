@@ -43,6 +43,10 @@ class NoteService {
         })
     }
 
+    UpdateApprove = (id, params) => {
+        return Axios.post(`${API_URL}/updateApprove/${id}`, params, config)
+    }
+
 }
 
 export default new NoteService();

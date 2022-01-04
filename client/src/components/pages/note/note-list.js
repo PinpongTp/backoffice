@@ -69,31 +69,35 @@ const NoteList = () => {
     }
 
     const Approve = (data) => {
-        if (data.approveData === 'true') {
-            return <Link to="#" onClick={() => {approveById(data.approveData, data.id)}} className='tag is-primary'>approve</Link>
+
+        if (data.approveData !== 0) {
+            return <Link to="#" onClick={() => {updateApproveById(data.id, data.approveData)}} className='tag is-primary'>approve</Link>
         }else {
-            return <Link to="#" onClick={() => {approveById(data.approveData, data.id)}} className='tag is-primary'>not approve</Link>
+            return <Link to="#" onClick={() => {updateApproveById(data.id, data.approveData)}} className='tag is-primary'>not approve</Link>
         }
     }
 
-    const approveById = (id, val) => {
-
-        console.log('Approve by id')
-        console.log(id, val)
+    const updateApproveById = (id, val) => {
 
         MySwal.fire({
             title: 'Are you sure?',
-            text: val === true ? 'Update to approve' : 'Update to not approve',
+            text: val === 0 ? 'Update to approve' : 'Update to not approve',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#00d1b2',
-            confirmButtonText: val === true ? 'Yes, approve' : 'Yes, not approve'
+            confirmButtonText: val === 0 ? 'Yes, approve' : 'Yes, not approve'
         }).then((result) => {
             if (result.isConfirmed) {
-                noteService.Delete(id).then((res) => {
+
+                let approve = val === 0 ? Date.now() : 0
+                const params = new URLSearchParams()   
+                params.append('approve', approve)
+
+                noteService.UpdateApprove(id, params).then((res) => {
                     MySwal.fire('Updated!', '', 'success')
                     getDataList()
                 })
+
             }
         })
     }
@@ -153,18 +157,18 @@ const NoteList = () => {
 
                                 {noteList.map((val, key) => {
 
-                                    if (!val.approved || val.approved <= 0) {
-                                        val.approve = 'false'
-                                    } else {
-                                        val.approve = 'true'
-                                    }
+                                    // if (!val.approved || val.approved === 0) {
+                                    //     val.approve = 'false'
+                                    // } else {
+                                    //     val.approve = 'true'
+                                    // }
 
                                     return (
                                         <tr key={key}>
                                             <td>{val.title}</td>
                                             <td>{val.subtitle}</td>
                                             {/* <td><TagsRender tagsData={val.tags} /></td> */}
-                                            <td><Approve approveData={val.approve} id={val.id}/></td>
+                                            <td><Approve approveData={val.approved} id={val.id}/></td>
                                             <td>{val.postdate}</td>
                                             {/* <td>Admin</td> */}
                                             <td >

@@ -13,9 +13,9 @@ exports.CreateController = (req, res, next) => {
 
     const { title, subtitle, content, postdate, tags, approve } = req.body;
     const thumbnail = req.file.filename
-    const approveDate = (approve === 'true') ? Date.now() : 0 ; // get unix time
+    // const approveDate = (approve === 'true') ? Date.now() : 0 ; // get unix time
 
-    const Data = new NoteModel(({ thumbnail: thumbnail, title: title, subtitle: subtitle, content: content, postdate: postdate, approve: approveDate, tags: tags }))
+    const Data = new NoteModel(({ thumbnail: thumbnail, title: title, subtitle: subtitle, content: content, postdate: postdate, approve: approve, tags: tags }))
 
     console.log('Data')
     console.log(Data)
@@ -77,6 +77,23 @@ exports.DeleteController = (req, res, next) => {
     NoteModel.deleteById({ id: id })
         .then(([result]) => {
             // todo check delete status
+            res.status(200)
+                .json(result)
+        })
+        .catch((error) => {
+            res.status(500)
+                .json({
+                    message: error
+                })
+        })
+}
+
+exports.UpdateApproveController = (req, res, next) => {
+    const id = req.params.id;
+    const { approve } = req.body;
+    //
+    NoteModel.UpdateApproveById({ id: id, approved: approve})
+        .then(([result]) => {
             res.status(200)
                 .json(result)
         })

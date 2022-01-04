@@ -9,7 +9,7 @@ class NoteModel {
         this.content = content
         this.postdate = postdate
         this.thumbnail = thumbnail
-        this.approve = approve
+        this.approved = approve
         this.tags = tags
         this.id = id
         this.rec_added = new Date()
@@ -18,10 +18,11 @@ class NoteModel {
     }
 
     insert() {
-        return db.execute(`INSERT INTO  ${tableName} (title, subtitle, content, thumbnail, tags, postdate, rec_status) VALUES(?, ?, ?, ?, ?, ?, ?)`,
-        [this.title, this.subtitle, this.content, this.thumbnail, this.tags, this.postdate, 'active'])
+        return db.execute(`INSERT INTO  ${tableName} (title, subtitle, content, thumbnail, tags, approved, postdate, rec_status) VALUES(?, ?, ?, ?, ?, ?, ?, ?)`,
+        [this.title, this.subtitle, this.content, this.thumbnail, this.tags, this.approved, this.postdate, 'active'])
     }
-    // Todo
+    // Todo 
+    // Todo update by field
     // update() { 
     //     return db.execute(`UPDATE ${tableName} SET name = ?, username = ?, email = ?  WHERE id = ?`,
     //     [this.name, this.username, this.email, this.id])
@@ -37,6 +38,9 @@ class NoteModel {
     }
     static deleteById ({id=0}) {
         return db.execute(`UPDATE ${tableName} SET rec_status = "inactive" WHERE id = ?`, [id])
+    }
+    static UpdateApproveById ({id=0, approved=0}) {
+        return db.execute(`UPDATE ${tableName} SET approved = ${approved} WHERE id = ?`, [id])
     }
 
 }
