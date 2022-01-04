@@ -8,7 +8,13 @@ function Login() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
-    const onsubmit = () => {
+    const keyPress = (e) => {
+        if(e.charCode === 13) {
+            submit()
+        }
+    }
+
+    const submit = () => {
         authService.login(username, password)
     }
 
@@ -34,10 +40,16 @@ function Login() {
 
                         <div className="field">
                             <div className="control">
-                                <input className="input is-medium" type="password" placeholder="Password" onChange={(e) => { setPassword(e.target.value) }} />
+                                <input 
+                                    className="input is-medium" 
+                                    type="password" 
+                                    placeholder="Password" 
+                                    onChange={(e) => { setPassword(e.target.value) }}
+                                    onKeyPress={(e) => { keyPress(e)}}
+                                />
                             </div>
                         </div>
-                        <button className="button is-block is-primary is-fullwidth is-medium" onClick={onsubmit} >Login</button>
+                        <button className="button is-block is-primary is-fullwidth is-medium" onClick={submit} >Login</button>
                         <br />
                         {/* <small><em>Lorem ipsum dolor sit amet consectetur.</em></small> */}
                         {/* </form> */}
