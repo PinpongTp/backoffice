@@ -77,6 +77,18 @@ const NoteList = () => {
         }
     }
 
+    const Empty = (data) => {
+        if (data.val.length === 0) {
+            return (
+            <tr>
+                <td colSpan={5}> No data.</td>
+            </tr>
+            )
+        } else {
+            return <></>
+        }
+    }
+
     const updateApproveById = (id, val) => {
 
         MySwal.fire({
@@ -163,13 +175,16 @@ const NoteList = () => {
                                     //     val.approve = 'true'
                                     // }
 
+                                    const d = new Date(val.postdate);
+                                    console.log(d.toDateString())
+
                                     return (
                                         <tr key={key}>
                                             <td>{val.title}</td>
                                             <td>{val.subtitle}</td>
                                             {/* <td><TagsRender tagsData={val.tags} /></td> */}
                                             <td><Approve approveData={val.approved} id={val.id}/></td>
-                                            <td>{val.postdate}</td>
+                                            <td>{new Date(val.postdate).toLocaleDateString()} {new Date(val.postdate).toLocaleTimeString()}</td>
                                             {/* <td>Admin</td> */}
                                             <td >
                                                 <div className="level-right buttons" >
@@ -193,9 +208,7 @@ const NoteList = () => {
                                     )
                                 })}
 
-                                {/* //! if empty
-                                */}
-
+                                <Empty val={noteList}></Empty>
                             </tbody>
                         </table>
                     </div>
