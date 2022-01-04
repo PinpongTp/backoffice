@@ -16,104 +16,123 @@ import ProfileEdit from "./components/pages/profile/profile-edit"
 // user
 import UserList from "./components/pages/user/user-list"
 import UserCreate from "./components/pages/user/user-create"
-// test
+import UserEdit from "./components/pages/user/user-edit";
+// note
+import NoteList from "./components/pages/note/note-list";
+import NoteCreate from "./components/pages/note/note-create";
+import NoteEdit from "./components/pages/note/note-edit";
+
+//! service
+import AuthService from "./service/auth-service"
 
 
 const AuthContainer = () => (
-  <div id="container" className="App flex container">
-    <Switch>
-      <Route exact path="/" render={() => <Redirect to="/login" />} />
-      <Route path="/login" component={Login} />
-    </Switch>
-  </div>
+    <div id="container" className="App flex container">
+        <Switch>
+            <Route exact path="/" render={() => <Redirect to="/login" />} />
+            <Route path="/login" component={Login} />
+        </Switch>
+    </div>
 )
 
-const DefaultContainer = () => (
-  <div id="container" className="App flex container">
-    <Aside />
-    <div className="main pad">
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/home" component={Home} />
-        <Route path="/profile-edit" component={ProfileEdit} />
-        <Route path="/user/list" component={UserList} />
-        <Route path="/user/create" component={UserCreate} />
-        <Route pate="/:id"> 404 </Route>
-        <Route pate="*"> * </Route>
-      </Switch>
-    </div>
-  </div>
-)
+const DefaultContainer = () => {
+    if (AuthService.loggedIn()) {
+        return (
+            <div id="container" className="App flex container">
+                <Aside />
+                <div className="main pad">
+                    <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route path="/home" component={Home} />
+                        <Route path="/profile-edit" component={ProfileEdit} />
+                        <Route path="/user/list" component={UserList} />
+                        <Route path="/user/create" component={UserCreate} />
+                        <Route path="/user/edit/:id" component={UserEdit} />
+                        <Route path="/note/list" component={NoteList} />
+                        <Route path="/note/create" component={NoteCreate} />
+                        <Route path="/note/edit/:id" component={NoteEdit} />
+                        <Route pate="/:id"> 404 </Route>
+                        <Route pate="*"> * </Route>
+                    </Switch>
+                </div>
+            </div>
+        )
+    }else {
+        return <Redirect to="/login" />
+    }
+}
 
 
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      modalState: false
-    };
+        this.state = {
+            modalState: false
+        };
 
-    this.toggleModal = this.toggleModal.bind(this);
-  }
+        this.toggleModal = this.toggleModal.bind(this);
+    }
 
-  toggleModal() {
+    toggleModal() {
+        AuthService.loggedIn({ test: 'test' }).then((res) => {
+            console.log(res)
+        })
 
 
+        // if(this.item === undefined) {return}
 
-    // if(this.item === undefined) {return}
+        console.log('toggleModal')
 
-    console.log('toggleModal')
+        this.setState((prev, props) => {
+            const newState = !prev.modalState;
 
-    this.setState((prev, props) => {
-      const newState = !prev.modalState;
+            return { modalState: newState };
+        });
+    }
 
-      return { modalState: newState };
-    });
-  }
+    test() {
+        console.log('test')
 
-  test() {
-    console.log('test')
+        // const location = useLocation();
+        // console.log(location.pathname);
 
-    // const location = useLocation();
-    // console.log(location.pathname);
+        // Popup.show('xxx')
 
-    // Popup.show('xxx')
+    }
 
-  }
+    render() {
+        return (
+            <main className="my-app">
 
-  render() {
-    return (
-      <main className="my-app">
+                <Modal
+                    closeModal={this.toggleModal}
+                    modalState={this.state.modalState}
+                    title="Example modal title"
+                >
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.Aenean efficitur sit amet massa fringilla egestas.Nullam condimentum luctus turpis.
+                    </p>
+                </Modal>
 
-        <Modal
-          closeModal={this.toggleModal}
-          modalState={this.state.modalState}
-          title="Example modal title"
-        >
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.Aenean efficitur sit amet massa fringilla egestas.Nullam condimentum luctus turpis.
-          </p>
-        </Modal>
+                <Nav />
 
-        <Nav />
-
-        {/* <button className="button is-primary" onClick={this.toggleModal}>
+                {/* <button className="button is-primary" onClick={this.toggleModal}>
           Open Modal
         </button> */}
 
-        {/* <button className='button is-primary' onClick={this.test}>test</button> */}
+                {/* <button className='button is-primary' onClick={this.test}>test</button> */}
 
-        <Switch>
-          <Route exact path="/(login)" component={AuthContainer} />
-          <Route component={DefaultContainer} />
-        </Switch>
+                <Switch>
+                    <Route exact path="/(login)" component={AuthContainer} />
+                    <Route component={DefaultContainer} />
+                </Switch>
 
-        <Footer />
-      </main>
-    );
-  }
+                <Footer />
+            </main>
+        );
+    }
 }
 
 export default App;

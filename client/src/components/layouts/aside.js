@@ -1,4 +1,11 @@
 import { NavLink, Link } from 'react-router-dom'
+// service 
+import AuthService from '../../service/auth-service'
+
+const Logout = () => {
+    AuthService.logout()
+    console.log('logout')
+}
 
 const Aside = () => {
 
@@ -39,7 +46,7 @@ const Aside = () => {
                     <NavLink activeClassName="is-active" to="/projects-list">
                         Projects
                     </NavLink>
-                    <NavLink activeClassName="is-active" to="/notes-list">
+                    <NavLink activeClassName="is-active" to="/note/list">
                         Notes
                     </NavLink>
                     <NavLink activeClassName="is-active" to="/gallerys-list">
@@ -89,7 +96,7 @@ const Aside = () => {
                     </ul>
                 </li>
                 <li>
-                    <Link to="/login">
+                    <Link to="/login" onClick={Logout}>
                         Logout
                     </Link>
                 </li>

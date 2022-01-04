@@ -9,24 +9,53 @@ I built from scratch because I'm a PHP programmer.
 - bulma
 - express
 
+## Install
+    .
+
 ## Version log update
 
 ### V0.01
-- backoffice layout with bulma
-- setup project
-- setup directory file
-- setup react -> rourter
-- setup layout with bulma
-- setup font awesome icon
-- bulma modal with react
-- ui login page
-- setup sidebar
-- setup express api file in server directory
-- setup JWT for register and login
-- edit directory construction file
-- create backoffice database
-- create api create and delete admins
+- client
+    - setup react 
+    - setup react rourter
+    - layout with bulma
+    - ui login page
+    - ui dashboard
+    - ui user management
+    - setup Axios
+    - setup font awesome icon
+- server
+    - setup express
+    - setup JWT for register and login
+    - create backoffice database
+    - create api create and delete admins
 
+### V0.02
+- login logout with JWT
+- user and auth service
+- user management (list, create, update, delete)
+- note management (list, create, update, delete)
+- create config file
+- upload files
+- input tags
+- input wysiwyg
+    
+### V0.03
+#### TODO
+- contact view
+- sent mail
+- website management
+    - website ad
+    - seo
+    - website theme
+- auto delete files
+- note management (validate)
+- user management (validate)
+
+### V0.04
+#### TODO
+- admin permission
+- service management
 
 ## Directory
 

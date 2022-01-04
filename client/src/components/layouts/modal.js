@@ -7,11 +7,11 @@ import PropTypes from 'prop-types';
 
 const Modal = ({ children, closeModal, modalState, title }) => {
 
-    console.log('xxxxxxxxxx')
-    console.log('children : ', children)
-    console.log('closeModal : ', closeModal)
-    console.log('modalState : ', modalState)
-    console.log('title : ', title)
+    // console.log('xxxxxxxxxx')
+    // console.log('children : ', children)
+    // console.log('closeModal : ', closeModal)
+    // console.log('modalState : ', modalState)
+    // console.log('title : ', title)
 
     if(!modalState) {
         return null;
