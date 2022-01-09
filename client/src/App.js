@@ -21,6 +21,10 @@ import UserEdit from "./components/pages/user/user-edit";
 import NoteList from "./components/pages/note/note-list";
 import NoteCreate from "./components/pages/note/note-create";
 import NoteEdit from "./components/pages/note/note-edit";
+// project
+import ProjectList from "./components/pages/project/project-list";
+import ProjectCreate from "./components/pages/project/project-create";
+import ProjectEdit from "./components/pages/project/project-edit";
 
 //! service
 import AuthService from "./service/auth-service"
@@ -45,12 +49,18 @@ const DefaultContainer = () => {
                         <Route exact path="/" component={Home} />
                         <Route path="/home" component={Home} />
                         <Route path="/profile-edit" component={ProfileEdit} />
+                        {/* user */}
                         <Route path="/user/list" component={UserList} />
                         <Route path="/user/create" component={UserCreate} />
                         <Route path="/user/edit/:id" component={UserEdit} />
+                        {/* note */}
                         <Route path="/note/list" component={NoteList} />
                         <Route path="/note/create" component={NoteCreate} />
                         <Route path="/note/edit/:id" component={NoteEdit} />
+                        {/* project */}
+                        <Route path="/project/list" component={ProjectList} />
+                        <Route path="/project/create" component={ProjectCreate} />
+                        <Route path="/project/edit/:id" component={ProjectEdit}/>
                         <Route pate="/:id"> 404 </Route>
                         <Route pate="*"> * </Route>
                     </Switch>
