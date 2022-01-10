@@ -43,7 +43,7 @@ const Aside = () => {
             </p>
             <ul className="menu-list">
                 <li>
-                    <NavLink activeClassName="is-active" to="/projects-list">
+                    <NavLink activeClassName="is-active" to="/project/list">
                         Projects
                     </NavLink>
                     <NavLink activeClassName="is-active" to="/note/list">

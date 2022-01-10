@@ -1,5 +1,5 @@
 {
-    "API_URL": "http://localhost:3001",
+    "API_URL": "http://localhost:3002",
     "THEME_COLORS": {
       "PRIMARY": "#007bff",
       "SECONDARY": "#fc3"

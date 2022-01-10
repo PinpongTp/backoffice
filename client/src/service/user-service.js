@@ -1,6 +1,7 @@
 import Axios from "axios";
-
-const API_URL = "http://localhost:3001";
+// config
+import configData from "../config/config.json";
+const API_URL = configData.API_URL + '/user';
 const config = {
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -10,15 +11,15 @@ const config = {
 class UserService {
 
     userData = (id) => {
-        return Axios.get(`${API_URL}/user/userdata/${id}`, config)
+        return Axios.get(`${API_URL}/userdata/${id}`, config)
     }
 
     userUpdate = (id, params) => {
-        return Axios.post(`${API_URL}/user/edit/${id}`, params, config)
+        return Axios.post(`${API_URL}/edit/${id}`, params, config)
     }
 
     userDelete = (id) => {
-        return Axios.delete(`${API_URL}/user/delete/${id}`)
+        return Axios.delete(`${API_URL}/delete/${id}`)
     }
 
 }

@@ -2,9 +2,10 @@ import Axios from "axios";
 // import { useLayoutEffect } from "react";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+// config
+import configData from "../config/config.json";
 const MySwal = withReactContent(Swal)
-
-const API_URL = "http://localhost:3001";
+const API_URL = configData.API_URL + '/user';
 const config = {
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -19,7 +20,7 @@ class AuthService {
         params.append('username', username)
         params.append('password', password)
 
-        Axios.post(`${API_URL}/user/login`, params, config).then((res) => {
+        Axios.post(`${API_URL}/login`, params, config).then((res) => {
             
 
             if (res.status === 200) {
